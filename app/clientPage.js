@@ -2,6 +2,7 @@
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { Separator } from "@/components/ui/separator";
 
 import { useState } from "react";
 import axios from "axios";
@@ -28,9 +29,10 @@ export default function ClientPage() {
         }
     }
     return (
-        <div className='flex justify-center align-middle py-12 sm:px-6 lg:px-8'>
-            <div className="w-full max-w-lg px-4 border border-gray-400 bg-white rounded-sm">
-                <div className="text-2xl text-center font-bold mt-2">Введіть дані для входу</div>
+        <div className='flex justify-center align-middle py-40 sm:px-6 lg:px-8'>
+            <div className="w-full max-w-lg px-4 border border-gray-400 bg-white rounded-lg">
+                <div className="text-2xl text-center font-bold my-2">Введіть дані для входу</div>
+                <Separator className="my-2"/>   
                 <Label htmlFor="email">Електронна пошта</Label>
                 <Input
                     id="email"
@@ -46,8 +48,8 @@ export default function ClientPage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
-
-                <Button type="submit" className="w-full my-8" onClick={handleLogin}>Login</Button>
+                <Separator className="my-4"/>   
+                <Button type="submit" className="w-full mb-4" onClick={handleLogin}>Вхід</Button>
             </div>
         </div>
     );
