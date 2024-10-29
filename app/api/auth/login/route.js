@@ -17,13 +17,13 @@ export async function POST(request) {
         })
         if (!user) {
             return NextResponse.json(
-                {error: "User not found"}, 
+                {error: "Такого користувача не існує"}, 
                 {status: 404}
             )
         }
         if (!await bcrypt.compare(password, user.password)) {
             return NextResponse.json(
-                {error: "Invalid password"}, 
+                {error: "Невірний пароль"}, 
                 {status: 400}
             )
         }

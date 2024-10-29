@@ -3,6 +3,7 @@ import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator";
+import toast from 'react-hot-toast';
 
 import { useState } from "react";
 import axios from "axios";
@@ -21,11 +22,10 @@ export default function ClientPage() {
                 email: email,
                 password: password
             })
-            console.log(result.data);
             localStorage.setItem('token', result.data.token);
             dispatch(login({token: result.data.token}));
         } catch (error) {
-
+            toast.error(error.response.data.error);
         }
     }
     return (
@@ -51,6 +51,7 @@ export default function ClientPage() {
                 <Separator className="my-4"/>   
                 <Button type="submit" className="w-full mb-4" onClick={handleLogin}>Вхід</Button>
             </div>
+            
         </div>
     );
 }

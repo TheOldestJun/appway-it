@@ -1,6 +1,8 @@
 "use client";
 import Header from "./Header";
 import Footer from "./Footer";
+import { Toaster } from 'react-hot-toast';
+
 
 export default function Layout({ children }) {
   return (
@@ -9,6 +11,7 @@ export default function Layout({ children }) {
         <Header />
         <div className="flex-grow">{children}</div>
         <Footer />
+        <Toaster />
       </div>
     </>
   );
