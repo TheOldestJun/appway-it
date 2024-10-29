@@ -15,7 +15,7 @@ export async function POST(request) {
             }
         })
         return NextResponse.json({
-            message: "User created",
+            message: "Користувача створено",
             result: result
         })
     } catch (error) {

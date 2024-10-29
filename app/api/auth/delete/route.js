@@ -8,7 +8,7 @@ export async function DELETE(request) {
       },
     });
     if (!result) {
-      return NextResponse.json({ error: "User not found" }, { status: 404 });
+      return NextResponse.json({ error: "Такого користувача не існує" }, { status: 404 });
     }
     result = await prisma.user.delete({
       where: {

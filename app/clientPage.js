@@ -24,6 +24,7 @@ export default function ClientPage() {
             })
             localStorage.setItem('token', result.data.token);
             dispatch(login({token: result.data.token}));
+            toast.success("Ласкаво просимо!");
         } catch (error) {
             toast.error(error.response.data.error);
         }
