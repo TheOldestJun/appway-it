@@ -9,9 +9,10 @@ import { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";  
 import {login} from "@/store/reducers/authSlice";
+import { useRouter } from "next/navigation";
 
 export default function ClientPage() {
-
+    const router = useRouter();
     const dispatch = useDispatch();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -25,6 +26,7 @@ export default function ClientPage() {
             localStorage.setItem('token', result.data.token);
             dispatch(login({token: result.data.token}));
             toast.success("Ласкаво просимо!");
+            router.push('/admin');
         } catch (error) {
             toast.error(error.response.data.error);
         }
