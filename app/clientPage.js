@@ -22,7 +22,7 @@ export default function ClientPage() {
             })
             console.log(result.data);
             localStorage.setItem('token', result.data.token);
-            dispatch(login({user: result.data.user, token: result.data.token}));
+            dispatch(login({token: result.data.token}));
         } catch (error) {
 
         }

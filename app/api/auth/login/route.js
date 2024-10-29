@@ -29,7 +29,6 @@ export async function POST(request) {
         }
         return NextResponse.json(
             {
-                user: {id: user.id, firstName: user.firstName, lastName: user.lastName, role: user.role},
                 token: jwt.sign(
                     {
                         id: user.id,
