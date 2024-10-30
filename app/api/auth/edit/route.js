@@ -2,15 +2,20 @@ import prisma from "@/prisma";
 import bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
 
-export async function POST(request) {
+export async function PUT(request) {
     const body = await request.json();
     if (!body.email || !body.password || !body.firstName || !body.lastName || !body.roleId) {
         return NextResponse.json({
-            error: "Всі поля повинні бути заповнені"
-        }, {status: 400})
+            error: "Всі поля повинні бути заповнені",
+        }, {
+            status: 400
+        })
     }
     try {
-        const result = await prisma.user.create({
+        const result = await prisma.user.update({
+            where: {
+                id: body.id
+            },
             data: {
                 email: body.email,
                 password: await bcrypt.hash(body.password, 10),
@@ -20,13 +25,17 @@ export async function POST(request) {
             }
         })
         return NextResponse.json({
-            message: "Користувача створено",
+            message: "Користувача оновлено",
             result: result
-        },{status: 201})
-    
+        }, {
+            status: 200
+        })
+
     } catch (error) {
         return NextResponse.json({
             error: error
-        }, {status: 500})
+        }, {
+            status: 500
+        })
     }
 }
