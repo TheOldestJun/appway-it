@@ -13,6 +13,6 @@ export default function Admin() {
         }
     }, [user])
     return (
-        <div>Admin</div>
+        <div>Admin page</div>
     )
 }

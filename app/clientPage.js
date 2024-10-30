@@ -10,6 +10,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";  
 import {login} from "@/store/reducers/authSlice";
 import { useRouter } from "next/navigation";
+import jwt from "jsonwebtoken";
 
 export default function ClientPage() {
     const router = useRouter();
@@ -26,7 +27,8 @@ export default function ClientPage() {
             localStorage.setItem('token', result.data.token);
             dispatch(login({token: result.data.token}));
             toast.success("Ласкаво просимо!");
-            router.push('/admin');
+            const user = jwt.decode(result.data.token);
+            router.push(`/${user.role.code}`);
         } catch (error) {
             toast.error(error.response.data.error);
         }
