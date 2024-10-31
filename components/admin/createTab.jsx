@@ -1,5 +1,4 @@
 import { useState } from "react"
-import axios from "axios"
 import toast from 'react-hot-toast';
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
@@ -11,7 +10,7 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 
-import UserSkeleton from "../skeletons/userSkeleton";
+import { useCreateUserMutation } from "@/store/services/users";
 
 
 //import { useGetRolesQuery } from "@/store/services/roles"
@@ -23,23 +22,16 @@ export default function CreateTab({ roles }) {
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [roleId, setRoleId] = useState('')
+    const [createUser] = useCreateUserMutation()
 
     const rolesList = roles.map(role => <SelectItem key={role.id} value={role.code}>{role.title}</SelectItem>)
 
     const handleSubmit = async () => {
         try {
-            const result = await axios.post('/api/auth/register', {
-                email: email,
-                password: password,
-                firstName: firstName,
-                lastName: lastName,
-                roleId: roleId
-            })
-            if (result.status === 201) {
-                toast.success("Користувача створено")
-            }
+            const result = await createUser({ email, password, firstName, lastName, roleId })
+            if (result.data?.message) toast.success(result.data.message)
         } catch (error) {
-            toast.error(error.response.data.error);
+            console.log(error);
         }
     }
 

@@ -9,6 +9,24 @@ export const usersApi = createApi({
             query: () => "users/getall",
             providesTags: ['Users'],
         }),
+        createUser: builder.mutation({
+            query: ({...data}) => ({
+                url: "create",
+                method: "POST",
+                body: data,
+            }),
+            onQueryStarted: async ({...data},{ dispatch, queryFulfilled }) => {
+                const patchResult = dispatch(
+                    usersApi.util.updateQueryData(
+                        'getAllUsers', {...data}, 
+                        (draft) => {
+                            Object.assign(draft, data)
+                        }
+                    )
+                );
+                dispatch(usersApi.util.invalidateTags(['Users']))
+            },
+        }),
         editUser: builder.mutation({
             query: ({ ...data }) => ({
                 url: "edit",
@@ -47,4 +65,4 @@ export const usersApi = createApi({
     }),
 })
 
-export const { useGetAllUsersQuery, useEditUserMutation, useDeleteUserMutation } = usersApi
+export const { useGetAllUsersQuery, useCreateUserMutation, useEditUserMutation, useDeleteUserMutation } = usersApi
