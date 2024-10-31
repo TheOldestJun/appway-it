@@ -11,7 +11,7 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 
-import UserSkeleton from "./userSkeleton";
+import UserSkeleton from "../skeletons/userSkeleton";
 
 
 //import { useGetRolesQuery } from "@/store/services/roles"

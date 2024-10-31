@@ -10,7 +10,7 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 
-import UserSkeleton from "./userSkeleton";
+import { UserSkeleton } from "../skeletons";
 
 import { useGetAllUsersQuery, useEditUserMutation } from '@/store/services/users'
 
@@ -34,7 +34,7 @@ export default function EditTab({ roles }) {
         </div>
     )
 
-    const usersList = users.map(user => <SelectItem key={user.id} value={user.id}>{user.email}</SelectItem>)
+    const usersList = users?.map(user => <SelectItem key={user.id} value={user.id}>{user.email}</SelectItem>)
 
     const rolesList = roles.map(role => <SelectItem key={role.id} value={role.code}>{role.title}</SelectItem>)
 

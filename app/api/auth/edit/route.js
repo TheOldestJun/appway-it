@@ -38,7 +38,6 @@ export async function PUT(request) {
         })
         return NextResponse.json({
             message: "Користувача оновлено",
-            result: result
         }, {
             status: 200
         })
