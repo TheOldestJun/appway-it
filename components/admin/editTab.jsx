@@ -13,7 +13,7 @@ import {
 
 import UserSkeleton from "./userSkeleton";
 
-import { useGetAllUsersQuery } from '@/store/services/users'
+import { useGetAllUsersQuery, useEditUserMutation } from '@/store/services/users'
 
 export default function EditTab({ roles }) {
     const [id, setId] = useState('')
@@ -23,6 +23,8 @@ export default function EditTab({ roles }) {
     const [lastName, setLastName] = useState('')
     const [roleId, setRoleId] = useState('')
 
+
+    const [editUser] = useEditUserMutation()
     const { data: users, isLoading, error } = useGetAllUsersQuery()
     if (isLoading) return (
         <UserSkeleton />
@@ -48,19 +50,10 @@ export default function EditTab({ roles }) {
     }
     const handleSubmit = async () => {
         try {
-            const result = await axios.put('/api/auth/edit', {
-                id: id,
-                email: email,
-                password: password,
-                firstName: firstName,
-                lastName: lastName,
-                roleId: roleId
-            })
-            if (result.status === 200) {
-                toast.success("Користувача редаговано")
-            }
+            const result = await editUser({ id, email, password, firstName, lastName, roleId })
+            if (result.data?.message) toast.success(result.data.message)
         } catch (error) {
-            toast.error(error.response.data.error);
+            console.log(error);
         }
     }
     return (
