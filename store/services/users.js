@@ -27,7 +27,24 @@ export const usersApi = createApi({
                 dispatch(usersApi.util.invalidateTags(['Users']))
             },
         }),
+        deleteUser: builder.mutation({
+            query: (id) => ({
+                url: `delete?id=${id}`,
+                method: "DELETE",
+            }),
+            onQueryStarted: async ({id},{ dispatch, queryFulfilled }) => {
+                const patchResult = dispatch(
+                    usersApi.util.updateQueryData(
+                        'getAllUsers', id, 
+                        (draft) => {
+                            Object.assign(draft, id)
+                        }
+                    )
+                );
+                dispatch(usersApi.util.invalidateTags(['Users']))
+            },
+        })
     }),
 })
 
-export const { useGetAllUsersQuery, useEditUserMutation } = usersApi
+export const { useGetAllUsersQuery, useEditUserMutation, useDeleteUserMutation } = usersApi

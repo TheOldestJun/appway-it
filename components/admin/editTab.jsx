@@ -1,5 +1,4 @@
 import { useState } from "react"
-import axios from "axios"
 import toast from 'react-hot-toast';
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
