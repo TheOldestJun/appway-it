@@ -12,13 +12,25 @@ export async function PUT(request) {
         })
     }
     try {
+        //check if password changed
+        const user = await prisma.user.findUnique({
+            where: {
+                id: body.id
+            },
+            select:{
+                password: true
+            }
+        })
+        if(user.password !== body.password){
+            body.password = await bcrypt.hash(body.password, 10);
+        }
         const result = await prisma.user.update({
             where: {
                 id: body.id
             },
             data: {
                 email: body.email,
-                password: await bcrypt.hash(body.password, 10),
+                password: body.password,
                 firstName: body.firstName,
                 lastName: body.lastName,
                 roleId: body.roleId

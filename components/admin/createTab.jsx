@@ -14,25 +14,16 @@ import {
 import UserSkeleton from "./userSkeleton";
 
 
-import { useGetRolesQuery } from "@/store/services/roles"
+//import { useGetRolesQuery } from "@/store/services/roles"
 
 
-export default function CreateTab() {
+export default function CreateTab({ roles }) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [roleId, setRoleId] = useState('')
 
-    const { data: roles, isLoading, error } = useGetRolesQuery()
-    if (isLoading) return (
-        <UserSkeleton />
-    )
-    if (error) return (
-        <div className="fixed top-[20%]">
-            <div className="text-5xl font-caveat text-gray-400">{`Ошибка на сервере: ${error.message}`}</div>
-        </div>
-    )
     const rolesList = roles.map(role => <SelectItem key={role.id} value={role.code}>{role.title}</SelectItem>)
 
     const handleSubmit = async () => {

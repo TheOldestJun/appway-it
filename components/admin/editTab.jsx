@@ -13,28 +13,67 @@ import {
 
 import UserSkeleton from "./userSkeleton";
 
+import { useGetAllUsersQuery } from '@/store/services/users'
 
-export default function EditTab() {
+export default function EditTab({ roles }) {
+    const [id, setId] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
     const [roleId, setRoleId] = useState('')
 
-    const handleSubmit = async () => {
+    const { data: users, isLoading, error } = useGetAllUsersQuery()
+    if (isLoading) return (
+        <UserSkeleton />
+    )
+    if (error) return (
+        <div className="fixed top-[20%]">
+            <div className="text-5xl font-caveat text-gray-400">{`Ошибка на сервере: ${error.message}`}</div>
+        </div>
+    )
 
+    const usersList = users.map(user => <SelectItem key={user.id} value={user.id}>{user.email}</SelectItem>)
+
+    const rolesList = roles.map(role => <SelectItem key={role.id} value={role.code}>{role.title}</SelectItem>)
+
+    const handleEmailChange = (id) => {
+        const currentUser = users.find(user => user.id === id)
+        setId(currentUser.id)
+        setEmail(currentUser.email)
+        setPassword(currentUser.password)
+        setFirstName(currentUser.firstName)
+        setLastName(currentUser.lastName)
+        setRoleId(currentUser.roleId)
+    }
+    const handleSubmit = async () => {
+        try {
+            const result = await axios.put('/api/auth/edit', {
+                id: id,
+                email: email,
+                password: password,
+                firstName: firstName,
+                lastName: lastName,
+                roleId: roleId
+            })
+            if (result.status === 200) {
+                toast.success("Користувача редаговано")
+            }
+        } catch (error) {
+            toast.error(error.response.data.error);
+        }
     }
     return (
         <div className="mx-auto max-w-xl">
             <div className="grid grid-cols-12 gap-5">
-                <Input
-                    id="email"
-                    type="email"
-                    placeholder="Пошта"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="col-span-6"
-                />
+                <Select onValueChange={handleEmailChange}>
+                    <SelectTrigger className="col-span-6">
+                        <SelectValue placeholder="Обрати пошту..." />
+                    </SelectTrigger>
+                    <SelectContent>
+                        {users && usersList}
+                    </SelectContent>
+                </Select>
                 <Input
                     id="password"
                     type="password"
@@ -60,14 +99,14 @@ export default function EditTab() {
                     className="col-span-6"
                 />
                 <Select onValueChange={setRoleId}>
-                    <SelectTrigger className="col-span-6">
-                        <SelectValue placeholder="Обрати email..." />
+                    <SelectTrigger className="col-span-12">
+                        <SelectValue placeholder="Обрати роль..." value={roleId} />
                     </SelectTrigger>
                     <SelectContent>
-
+                        {roles && rolesList}
                     </SelectContent>
                 </Select>
-                <Button className="col-span-12" onClick={handleSubmit}>Створити</Button>
+                <Button className="col-span-12" onClick={handleSubmit}>Редагувати</Button>
             </div>
         </div>
     )
