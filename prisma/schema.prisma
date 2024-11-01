@@ -25,3 +25,16 @@ model Role {
   image String
   users User[]
 }
+
+model Product {
+  id     Int    @id @default(autoincrement())
+  title  String @unique
+  unit   Unit   @relation(fields: [unitId], references: [id])
+  unitId Int
+}
+
+model Unit {
+  id       Int       @id @default(autoincrement())
+  title    String    @unique
+  products Product[]
+}
