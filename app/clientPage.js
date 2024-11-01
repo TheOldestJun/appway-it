@@ -55,8 +55,10 @@ export default function ClientPage() {
                 />
                 <Separator className="my-4"/>   
                 <Button type="submit" className="w-full mb-4" onClick={handleLogin}>Вхід</Button>
+                <div className="text-right mb-4">
+                    <a href="/request-reset" className="text-sky-600">Скинути пароль</a>
+                </div>
             </div>
-            
         </div>
     );
 }

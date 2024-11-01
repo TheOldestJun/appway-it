@@ -24,7 +24,7 @@ export async function PUT(request) {
         if(user.password !== body.password){
             body.password = await bcrypt.hash(body.password, 10);
         }
-        const result = await prisma.user.update({
+        await prisma.user.update({
             where: {
                 id: body.id
             },
