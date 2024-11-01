@@ -1,6 +1,7 @@
 import { Label } from "../ui/label"
 import { Input } from "../ui/input"
 import { Button } from "../ui/button"
+import { Separator } from "../ui/separator"
 
 import ComboBox from "./comboBox"
 import NewAppTable from "./newAppTable"
@@ -21,15 +22,15 @@ let products = [
 ]
 
 let units = [
-    { value: 1, label: 'шт.' },
-    { value: 2, label: 'кг.' },
+    { value: 1, label: 'шт' },
+    { value: 2, label: 'кг' },
 ]
 
 export default function NewApplication() {
     const [selectedProduct, setSelectedProduct] = useState()
     const [notes, setNotes] = useState('')
     const [selectedUnits, setSelectedUnits] = useState()
-    const [quantity, setQuantity] = useState()
+    const [quantity, setQuantity] = useState(1)
     const handleCreateProduct = (value) => {
         products.push({ value: products.length + 1, label: value })
         console.log(products)
@@ -40,9 +41,11 @@ export default function NewApplication() {
     }
     return (
         <div>
-            <Label htmlFor="products" className="text-sm font-bold">Введіть дані для заявки</Label>
+            <div className="text-xl font-bold">Введіть дані для заявки</div>
+            <Separator className="my-2" />
             <div className="grid grid-cols-12 gap-5">
                 <div className="col-span-4">
+                    <Label htmlFor="products" className="text-sm">ТМЦ</Label>
                     <ComboBox
                         id="products"
                         options={products}
@@ -50,18 +53,21 @@ export default function NewApplication() {
                         onSelectedOption={setSelectedProduct}
                         onCreateOption={(value) => handleCreateProduct(value)}
                         isMulti={false}
-                        placeholder={"Оберіть ТМЦ"}
+                        placeholder={"..."}
                     />
                 </div>
                 <div className="col-span-4">
+                    <Label htmlFor="notes" className="text-sm">Примітки, опис, тощо</Label>
                     <Input
+                        id="notes"
                         type="text"
-                        placeholder="Примітки"
+                        placeholder="..."
                         value={notes}
                         onChange={(e) => setNotes(e.target.value)}
                     />
                 </div>
                 <div className="col-span-2">
+                    <Label htmlFor="units" className="text-sm">Одиниці виміру</Label>
                     <ComboBox
                         id="units"
                         options={units}
@@ -69,17 +75,21 @@ export default function NewApplication() {
                         onSelectedOption={setSelectedUnits}
                         onCreateOption={(value) => handleCreateUnits(value)}
                         isMulti={false}
-                        placeholder={"Од. вим."}
+                        placeholder={"..."}
                     />
                 </div>
                 <div className="col-span-2">
+                    <Label htmlFor="quantity" className="text-sm">Кількість</Label>
                     <Input
+                        id="quantity"
                         type="number"
+                        min="1"
                         placeholder="Кількість"
                         value={quantity}
                         onChange={(e) => setQuantity(e.target.value)}
                     />
                 </div>
+                <Button type="submit" className="col-span-12">Добавити</Button>
                 <div className="col-span-12">
                     <NewAppTable />
                 </div>

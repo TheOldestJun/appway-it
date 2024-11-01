@@ -16,6 +16,7 @@ model User {
   lastName  String?
   role      Role    @relation(fields: [roleId], references: [code])
   roleId    String
+  orders    Order[]
 }
 
 model Role {
@@ -27,14 +28,25 @@ model Role {
 }
 
 model Product {
-  id     Int    @id @default(autoincrement())
-  title  String @unique
-  unit   Unit   @relation(fields: [unitId], references: [id])
+  id     Int     @id @default(autoincrement())
+  title  String  @unique
+  unit   Unit    @relation(fields: [unitId], references: [id])
   unitId Int
+  orders Order[]
 }
 
 model Unit {
   id       Int       @id @default(autoincrement())
   title    String    @unique
   products Product[]
+}
+
+model Order {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @db.Date
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  product   Product  @relation(fields: [productId], references: [id])
+  productId Int
+  quantity  Float
 }
