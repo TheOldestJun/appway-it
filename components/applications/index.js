@@ -1,4 +1,4 @@
-import AllApplications from "./all";
-import NewApplication from "./new";
+import AllApplications from "./allApp";
+import NewApplication from "./newApp";
 
 export { AllApplications, NewApplication }

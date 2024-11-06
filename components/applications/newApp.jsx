@@ -5,6 +5,7 @@ import { Separator } from "../ui/separator"
 
 import ComboBox from "./comboBox"
 import NewAppTable from "./newAppTable"
+import Units from "./units"
 
 import { useState } from "react"
 
@@ -67,16 +68,7 @@ export default function NewApplication() {
                     />
                 </div>
                 <div className="col-span-2">
-                    <Label htmlFor="units" className="text-sm">Одиниці виміру</Label>
-                    <ComboBox
-                        id="units"
-                        options={units}
-                        value={selectedUnits}
-                        onSelectedOption={setSelectedUnits}
-                        onCreateOption={(value) => handleCreateUnits(value)}
-                        isMulti={false}
-                        placeholder={"..."}
-                    />
+                    <Units />
                 </div>
                 <div className="col-span-2">
                     <Label htmlFor="quantity" className="text-sm">Кількість</Label>
