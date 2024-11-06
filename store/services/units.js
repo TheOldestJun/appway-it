@@ -24,7 +24,24 @@ export const unitsApi = createApi({
                 dispatch(unitsApi.util.invalidateTags(["Units"]));
             },
         }),
+        deleteUnit: builder.mutation({
+            query: (id) => ({
+                url: `delete?id=${id}`,
+                method: "DELETE",
+            }),
+            onQueryStarted: async ({id},{ dispatch, queryFulfilled }) => {
+                const patchResult = dispatch(
+                    unitsApi.util.updateQueryData(
+                        'getAllUnits', id, 
+                        (draft) => {
+                            Object.assign(draft, id)
+                        }
+                    )
+                );
+                dispatch(unitsApi.util.invalidateTags(['Units']))
+            },
+        }),
     }),
 });
 
-export const { useGetAllUnitsQuery, useCreateUnitMutation } = unitsApi
+export const { useGetAllUnitsQuery, useCreateUnitMutation, useDeleteUnitMutation } = unitsApi
