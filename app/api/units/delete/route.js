@@ -7,7 +7,7 @@ export async function DELETE(request) {
     try {
         await prisma.unit.delete({
             where: {
-                id: parseInt(id)
+                id: id
             }
         })
         return NextResponse.json({ message: "Елемент видалено" }, { status: 200 });

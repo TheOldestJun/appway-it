@@ -33,25 +33,25 @@ model Role {
 }
 
 model Product {
-  id     Int     @id @default(autoincrement())
+  id     String  @id @default(cuid())
   title  String  @unique
   unit   Unit    @relation(fields: [unitId], references: [id])
-  unitId Int
+  unitId String
   orders Order[]
 }
 
 model Unit {
-  id       Int       @id @default(autoincrement())
+  id       String  @id @default(cuid())
   title    String    @unique
   products Product[]
 }
 
 model Order {
-  id                Int      @id @default(autoincrement())
+  id                String  @id @default(cuid())
   // product data  
   status            String // depends on fields [quantityCreated, approved, quantityOrdered, quantityDelivered, quantityGivenOut, closerId]
   product           Product  @relation(fields: [productId], references: [id])
-  productId         Int
+  productId         String
   quantityCreated   Float
   quantityOrdered   Float
   quantityDelivered Float

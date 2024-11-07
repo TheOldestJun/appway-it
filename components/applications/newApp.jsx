@@ -22,11 +22,6 @@ let products = [
     { value: 9, label: 'Гайка М42' },
 ]
 
-let units = [
-    { value: 1, label: 'шт' },
-    { value: 2, label: 'кг' },
-]
-
 export default function NewApplication() {
     const [selectedProduct, setSelectedProduct] = useState()
     const [notes, setNotes] = useState('')
@@ -35,10 +30,6 @@ export default function NewApplication() {
     const handleCreateProduct = (value) => {
         products.push({ value: products.length + 1, label: value })
         console.log(products)
-    }
-    const handleCreateUnits = (value) => {
-        units.push({ value: units.length + 1, label: value })
-        console.log(units)
     }
     return (
         <div>

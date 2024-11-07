@@ -22,7 +22,7 @@ export default function ComboBox({ options, value, isMulti, placeholder, onCreat
                 multiValueLabel: () => `@apply px-2 !important`,
                 multiValueRemove: () => `@apply mx-2 !important`,
                 menu: () => `@apply w-full !important bg-card mt-2 rounded-xl text-left text-sm  !important`,
-                menuList: () => `@apply overflow-y-scroll no-scrollbar !important`,
+                menuList: () => `@apply overflow-y-scroll no-scrollbar mx-2 !important`,
                 option: () => `@apply hover:bg-secondary !important`,
             }}
         />
