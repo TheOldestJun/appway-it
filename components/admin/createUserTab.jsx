@@ -16,7 +16,7 @@ import { useCreateUserMutation } from "@/store/services/users";
 //import { useGetRolesQuery } from "@/store/services/roles"
 
 
-export default function CreateTab({ roles }) {
+export default function CreateUserTab({ roles }) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [firstName, setFirstName] = useState('')

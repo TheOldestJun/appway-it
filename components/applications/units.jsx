@@ -3,6 +3,7 @@ import ComboBox from "./comboBox"
 import { useState } from "react"
 import { useGetAllUnitsQuery, useCreateUnitMutation } from "@/store/services/units"
 import { UnitsSkeleton } from "../skeletons"
+import { ServerError } from "../alerts"
 
 export default function Units() {
     const [selectedUnits, setSelectedUnits] = useState()
@@ -15,7 +16,7 @@ export default function Units() {
 
     const { data: units, isLoading, error } = useGetAllUnitsQuery()
     if (isLoading) return <UnitsSkeleton />
-    if (error) return <div>{error.message}</div>
+    if (error) return <ServerError error={error} />
     const unitsList = units?.map(unit => { return { value: unit.id, label: unit.title } })
     return (
         <>

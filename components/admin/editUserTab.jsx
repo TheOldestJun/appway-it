@@ -11,10 +11,11 @@ import {
 } from "@/components/ui/select"
 
 import { UserSkeleton } from "../skeletons";
+import { ServerError } from "../alerts";
 
 import { useGetAllUsersQuery, useEditUserMutation } from '@/store/services/users'
 
-export default function EditTab({ roles }) {
+export default function EditUserTab({ roles }) {
     const [id, setId] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -29,9 +30,7 @@ export default function EditTab({ roles }) {
         <UserSkeleton />
     )
     if (error) return (
-        <div className="fixed top-[20%]">
-            <div className="text-5xl font-caveat text-gray-400">{`Ошибка на сервере: ${error.message}`}</div>
-        </div>
+        <ServerError error={error} />
     )
 
     const usersList = users?.map(user => <SelectItem key={user.id} value={user.id}>{user.email}</SelectItem>)

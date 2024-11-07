@@ -1,5 +1,6 @@
-import CreateTab from "./createTab";
-import DeleteTab from "./deleteTab";
-import EditTab from "./editTab";
+import CreateUserTab from "./createUserTab";
+import DeleteUserTab from "./deleteUserTab";
+import EditUserTab from "./editUserTab";
+import DeleteUnitsTab from "./deleteUnitsTab";
 
-export { CreateTab, DeleteTab, EditTab };
+export { CreateUserTab, DeleteUserTab, EditUserTab, DeleteUnitsTab };

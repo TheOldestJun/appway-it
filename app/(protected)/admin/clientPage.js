@@ -1,7 +1,12 @@
 "use client";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { CreateTab, EditTab, DeleteTab } from "@/components/admin";
+import { 
+    CreateUserTab, 
+    EditUserTab, 
+    DeleteUserTab,
+    DeleteUnitsTab
+} from "@/components/admin";
 
 
 import { useSelector } from "react-redux"
@@ -24,6 +29,7 @@ export default function ClientAdmin({roles}) {
             <Tabs defaultValue="users" className="w-full">
                 <TabsList className="w-full">
                     <TabsTrigger value="users">Користувачі</TabsTrigger>
+                    <TabsTrigger value="materials">ТМЦ</TabsTrigger>
                     <TabsTrigger value="dummy">Щось тут буде...</TabsTrigger>
                 </TabsList>
                 <TabsContent value="users">
@@ -33,9 +39,19 @@ export default function ClientAdmin({roles}) {
                             <TabsTrigger value="edit">Редагувати</TabsTrigger>
                             <TabsTrigger value="delete">Видалити</TabsTrigger>
                         </TabsList>
-                        <TabsContent value="create"><CreateTab roles={roles} /></TabsContent>
-                        <TabsContent value="edit"><EditTab roles={roles} /></TabsContent>
-                        <TabsContent value="delete"><DeleteTab /></TabsContent>
+                        <TabsContent value="create"><CreateUserTab roles={roles} /></TabsContent>
+                        <TabsContent value="edit"><EditUserTab roles={roles} /></TabsContent>
+                        <TabsContent value="delete"><DeleteUserTab /></TabsContent>
+                    </Tabs>
+                </TabsContent>
+                <TabsContent value="materials">
+                    <Tabs defaultValue="deleteUnit" className="w-full">
+                        <TabsList className="w-full">
+                            <TabsTrigger value="deleteUnit">Видалити одиниці виміру</TabsTrigger>
+                            <TabsTrigger value="dummy">Щось тут буде...</TabsTrigger>
+                        </TabsList>
+                        <TabsContent value="deleteUnit"><DeleteUnitsTab /></TabsContent>
+                        <TabsContent value="dummy">Dummy here...</TabsContent>
                     </Tabs>
                 </TabsContent>
                 <TabsContent value="dummy">Dummy here...</TabsContent>

@@ -11,11 +11,12 @@ import toast from 'react-hot-toast';
 import { useState } from "react";
 
 import { DeleteUserSkeleton } from "../skeletons";
+import { ServerError } from "../alerts";
 
 import { useGetAllUsersQuery, useDeleteUserMutation } from '@/store/services/users'
 
 
-export default function DeleteTab() {
+export default function DeleteUserTab() {
     const [id, setId] = useState('')
     const [deleteUser] = useDeleteUserMutation()
     const { data: users, isLoading, error } = useGetAllUsersQuery()
@@ -23,9 +24,7 @@ export default function DeleteTab() {
         <DeleteUserSkeleton />
     )
     if (error) return (
-        <div className="fixed top-[20%]">
-            <div className="text-5xl font-caveat text-gray-400">{`Ошибка на сервере: ${error.message}`}</div>
-        </div>
+        <ServerError error={error} />
     )
     const usersList = users?.map(user => <SelectItem key={user.id} value={user.id}>{user.email}</SelectItem>)
 
