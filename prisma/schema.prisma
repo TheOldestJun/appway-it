@@ -38,12 +38,14 @@ model Product {
   unit   Unit    @relation(fields: [unitId], references: [id])
   unitId String
   orders Order[]
+  currentOrders CurrentOrder[]
 }
 
 model Unit {
   id       String  @id @default(cuid())
   title    String    @unique
   products Product[]
+  currentOrders CurrentOrder[]
 }
 
 model Order {
@@ -80,4 +82,14 @@ model Order {
   receivedById      String
   receivedDate      DateTime @db.Date
   givenOutDate      DateTime @db.Date
+}
+
+model CurrentOrder {
+  id       String  @id @default(cuid())
+  product  Product  @relation(fields: [productId], references: [id])
+  productId String
+  units    Unit    @relation(fields: [unitId], references: [id])
+  unitId   String 
+  description String
+  quantity Float
 }
