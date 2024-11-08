@@ -21,7 +21,6 @@ model User {
   ordersOrdered   Order[] @relation("orderedBy")
   ordersDelivered Order[] @relation("deliveredBy")
   ordersReceived  Order[] @relation("receivedBy")
-  ordersClosed    Order[] @relation("closedBy")
 }
 
 model Role {
@@ -47,39 +46,48 @@ model Unit {
 model Order {
   id                String  @id @default(cuid())
   // product data  
-  status            String // depends on fields [quantityCreated, approved, quantityOrdered, quantityDelivered, quantityGivenOut, closerId]
+  status            OrderStatus // depends on fields [quantityCreated, approved, quantityOrdered, quantityDelivered, quantityGivenOut, closerId]
   product           Product  @relation(fields: [productId], references: [id])
   productId         String
-  description       String
+  description       String?
   unit              Unit     @relation(fields: [unitId], references: [id])
   unitId            String
   quantityCreated   Float
-  quantityOrdered   Float
-  quantityDelivered Float
-  quantityGivenOut  Float
+  quantityOrdered   Float?
+  quantityDelivered Float?
+  quantityGivenOut  Float?
   // applicants data
   createdBy         User     @relation(name: "createdBy", fields: [creatorId], references: [id])
   creatorId         String
   createdDate       DateTime @default(now()) @db.Date
-  closedBy          User     @relation(name: "closedBy", fields: [closerId], references: [id])
-  closerId          String
-  closedDate        DateTime @db.Date
+  closed            Boolean  @default(false)
+  closerId          String?
+  closedDate        DateTime? @db.Date
   // directors data
-  approvedBy        User     @relation(name: "approvedBy", fields: [approverId], references: [id])
-  approverId        String
-  approvedDate      DateTime @db.Date
-  approved          Boolean
+  approvedBy        User?     @relation(name: "approvedBy", fields: [approverId], references: [id])
+  approverId        String?
+  approvedDate      DateTime? @db.Date
+  approved          Boolean @default(false)
   // executors data
-  orderedBy         User     @relation(name: "orderedBy", fields: [orderedById], references: [id])
-  orderedById       String
-  orderedDate       DateTime @db.Date
-  deliveredBy       User     @relation(name: "deliveredBy", fields: [deliveredById], references: [id])
-  deliveredById     String
-  deliveredDate     DateTime @db.Date
+  orderedBy         User?     @relation(name: "orderedBy", fields: [orderedById], references: [id])
+  orderedById       String?
+  orderedDate       DateTime? @db.Date
+  deliveredBy       User?     @relation(name: "deliveredBy", fields: [deliveredById], references: [id])
+  deliveredById     String?
+  deliveredDate     DateTime? @db.Date
   // warehouse data
-  receivedBy        User     @relation(name: "receivedBy", fields: [receivedById], references: [id])
-  receivedById      String
-  receivedDate      DateTime @db.Date
-  givenOutDate      DateTime @db.Date
+  receivedBy        User?     @relation(name: "receivedBy", fields: [receivedById], references: [id])
+  receivedById      String?
+  receivedDate      DateTime? @db.Date
+  givenOutDate      DateTime? @db.Date
 }
 
+enum OrderStatus {
+  CREATED
+  APPROVED
+  ORDERED
+  DELIVERED
+  GIVENOUT
+  RECEIVED
+  CLOSED
+}
