@@ -8,9 +8,25 @@ import {
     TableRow,
 } from "@/components/ui/table"
 
+import { useSelector } from "react-redux"
 
 
-export default function NewAppTable({ data }) {
+
+export default function NewAppTable() {
+
+    const data = useSelector((state) => state.currentOrder);
+
+    const mappedData = data?.orders.map((order) => {
+        return (
+            <TableRow key={order.id}>
+                <TableCell>{order.product.label}</TableCell>
+                <TableCell>{order.description}</TableCell>
+                <TableCell className="text-right">{order.unit.label}</TableCell>
+                <TableCell className="text-right">{order.quantity}</TableCell>
+            </TableRow>
+        )
+    })
+
     return (
         <div>
             <Table>
@@ -24,12 +40,7 @@ export default function NewAppTable({ data }) {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    <TableRow>
-                        <TableCell className="font-medium">Болт 22*90</TableCell>
-                        <TableCell>DIN933</TableCell>
-                        <TableCell className="text-right">шт</TableCell>
-                        <TableCell className="text-right">250</TableCell>
-                    </TableRow>
+                    {mappedData}
                 </TableBody>
             </Table>
         </div>
