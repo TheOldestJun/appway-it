@@ -21,7 +21,6 @@ export default function NewApplication() {
     const handleSubmitLine = () => {
         dispatch(addOrder({ description, quantity }))
         dispatch(clearLine())
-        toast.success('Замовлення додано')
     }
 
     return (
@@ -65,7 +64,6 @@ export default function NewApplication() {
                 <div className="col-span-12">
                     <NewAppTable />
                 </div>
-                <Button type="submit" className="col-span-12">Зберегти</Button>
             </div>
         </div>
 

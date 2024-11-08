@@ -6,7 +6,7 @@ let initialState = {
     product: null,
     description: null,
     unit: null,
-    quantity: null,
+    quantity: 1.0,
 };
 
 const currentOrderSlice = createSlice({
@@ -26,6 +26,7 @@ const currentOrderSlice = createSlice({
             state.quantity = null;
         },
         addOrder: (state, action) => {
+            if (state.product === null || state.unit === null) return;
             state.orders.push({
                 id: state.orderId++,
                 product: state.product,
