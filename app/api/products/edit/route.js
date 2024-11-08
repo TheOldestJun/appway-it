@@ -11,8 +11,7 @@ export async function PUT(request) {
                 id: id
             },
             data: {
-                title,
-                unitId
+                title
             }
         });
         return NextResponse.json(result, { status: 200 });

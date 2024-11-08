@@ -1,6 +1,6 @@
 import UserSkeleton from "./userSkeleton";
 import DeleteUserSkeleton from "./deleteUserSkeleton";
-import UnitsSkeleton from "./unitsSkeleton";
+import InputSkeleton from "./inputSkeleton";
 import DeleteUnitsSkeleton from "./deleteUnitsSkeleton";
 
-export { UserSkeleton, DeleteUserSkeleton, UnitsSkeleton, DeleteUnitsSkeleton };
+export { UserSkeleton, DeleteUserSkeleton, InputSkeleton, DeleteUnitsSkeleton };
