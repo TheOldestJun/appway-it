@@ -3,9 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 let initialState = {
     orders: [],
     orderId: 1,
-    productId: null,
+    product: null,
     description: null,
-    unitId: null,
+    unit: null,
     quantity: null,
 };
 
@@ -13,24 +13,24 @@ const currentOrderSlice = createSlice({
     name: "currentOrder",
     initialState,
     reducers: {
-        setProductId: (state, action) => {
-            state.productId = action.payload;
+        setProduct: (state, action) => {
+            state.product = action.payload;
         },
-        setUnitId: (state, action) => {
-            state.unitId = action.payload;
+        setUnit: (state, action) => {
+            state.unit = action.payload;
         },
         clearLine: (state) => {
-            state.productId = null;
+            state.product = null;
             state.description = null;
-            state.unitId = null;
+            state.unit = null;
             state.quantity = null;
         },
         addOrder: (state, action) => {
             state.orders.push({
                 id: state.orderId++,
-                productId: state.productId,
+                product: state.product,
                 description: action.payload.description,
-                unitId: state.unitId,
+                unit: state.unit,
                 quantity: action.payload.quantity,
             });
         },
@@ -43,5 +43,5 @@ const currentOrderSlice = createSlice({
     },
 });
 
-export const { setProductId, setUnitId, clearLine, addOrder, removeOrder, clearOrders } = currentOrderSlice.actions;
+export const { setProduct, setUnit, clearLine, addOrder, removeOrder, clearOrders } = currentOrderSlice.actions;
 export default currentOrderSlice.reducer;

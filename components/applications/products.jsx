@@ -4,7 +4,7 @@ import { useState } from "react"
 import { useGetAllProductsQuery, useCreateProductMutation } from "@/store/services/products"
 import { ServerError } from "../alerts"
 import { useDispatch } from "react-redux"
-import { setProductId } from "@/store/reducers/currentOrderSlice"
+import { setProduct } from "@/store/reducers/currentOrderSlice"
 import { InputSkeleton } from "../skeletons"
 import toast from 'react-hot-toast';
 
@@ -26,7 +26,7 @@ export default function Products() {
     }
 
     const handleSelectProduct = (value) => {
-        dispatch(setProductId(value.value))
+        dispatch(setProduct(value))
         setSelectedProduct(value)
     }
 

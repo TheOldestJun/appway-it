@@ -5,7 +5,7 @@ import { useGetAllUnitsQuery, useCreateUnitMutation } from "@/store/services/uni
 import { InputSkeleton } from "../skeletons"
 import { ServerError } from "../alerts"
 import { useDispatch } from "react-redux"
-import { setUnitId } from "@/store/reducers/currentOrderSlice"
+import { setUnit } from "@/store/reducers/currentOrderSlice"
 import toast from 'react-hot-toast';
 
 export default function Units() {
@@ -20,7 +20,7 @@ export default function Units() {
     }
 
     const handleSelectUnits = (value) => {
-        dispatch(setUnitId(value.value))
+        dispatch(setUnit(value))
         setSelectedUnits(value)
     }
 
