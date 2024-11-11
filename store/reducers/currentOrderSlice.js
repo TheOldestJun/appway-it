@@ -4,7 +4,7 @@ let initialState = {
     orders: [],
     orderId: 1,
     product: null,
-    description: null,
+    description: '',
     unit: null,
     quantity: 1.0,
 };
