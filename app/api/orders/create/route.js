@@ -6,8 +6,7 @@ import { OrderStatus } from "@prisma/client";
 export async function POST(request) {
     //const {data, creatorId} = await request.json();
     const body = await request.json();
-    const {data, creatorId} = body
-    console.log(body)
+    const { data, creatorId } = body
     const orderList = data.map((order) => ({...order, creatorId, status: OrderStatus.CREATED}))
     try {
         const order = await prisma.order.createMany({

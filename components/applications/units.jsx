@@ -17,9 +17,14 @@ export default function Units() {
 
     const [createUnit] = useCreateUnitMutation()
 
-    const handleCreateUnits = (value) => {
-        createUnit({ title: value.toUpperCase() })
-        toast.success('Одиницю виміру успішно додано')
+    const handleCreateUnits = async (value) => {
+        try {
+            const payload = await createUnit({ title: value.toUpperCase() })
+            if (payload) toast.success('Одиницю виміру успішно додано')
+        } catch (error) {
+            toast.error(error)
+        }
+
     }
 
     const handleSelectUnits = (value) => {

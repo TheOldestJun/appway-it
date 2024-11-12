@@ -8,6 +8,7 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { Button } from "../ui/button"
+import toast from "react-hot-toast"
 
 import { useSelector, useDispatch } from "react-redux"
 import { removeOrder, clearOrders } from "@/store/reducers/currentOrderSlice"
@@ -21,7 +22,6 @@ export default function NewAppTable() {
     const [createOrder] = useCreateOrderMutation();
     const userId = useSelector((state) => state.auth.user.id);
     const data = useSelector((state) => state.currentOrder);
-    console.log(userId)
 
     const mappedData = data?.orders.map((order) => {
         return (
@@ -42,7 +42,7 @@ export default function NewAppTable() {
         )
     })
 
-    const submitToDB = () => {
+    const submitToDB = async () => {
         const mappedData = data?.orders.map((order) => ({
             productId: order.product.value,
             description: order.description,
@@ -50,10 +50,10 @@ export default function NewAppTable() {
             quantityCreated: parseFloat(order.quantity)
         }))
         try {
-            const payload = createOrder({ data: mappedData, creatorId: userId }).unwrap();
-            console.log(payload)
+            const payload = await createOrder({ data: mappedData, creatorId: userId }).unwrap();
+            if (payload) toast.success("Заявка успішно додана до бази даних!")
         } catch (error) {
-            console.log(error)
+            toast.error(error)
         }
         dispatch(clearOrders())
     }

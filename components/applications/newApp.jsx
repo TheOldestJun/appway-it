@@ -26,7 +26,7 @@ export default function NewApplication() {
     }
 
     return (
-        <div>
+        <>
             <div className="text-xl font-bold">Введіть дані для заявки</div>
             <Separator className="my-2" />
             <div className="grid grid-cols-12 gap-5">
@@ -67,7 +67,7 @@ export default function NewApplication() {
                     <NewAppTable />
                 </div>
             </div>
-        </div>
+        </>
 
     )
 }

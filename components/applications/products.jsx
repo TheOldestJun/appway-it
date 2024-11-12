@@ -24,9 +24,14 @@ export default function Products() {
     if (error) return <ServerError error={error} />
     const productsList = products?.map(product => { return { value: product.id, label: product.title } })
 
-    const handleCreateProduct = (value) => {
-        createProduct({ title: value.toUpperCase() })
-        toast.success('ТМЦ успішно додано')
+    const handleCreateProduct = async (value) => {
+        try {
+            const payload = await createProduct({ title: value.toUpperCase() })
+            if (payload) toast.success('ТМЦ успішно додано')
+        } catch (error) {
+            toast.error(error)
+        }
+
     }
 
     const handleSelectProduct = (value) => {
