@@ -11,15 +11,17 @@ import { Button } from "../ui/button"
 
 import { useSelector, useDispatch } from "react-redux"
 import { removeOrder, clearOrders } from "@/store/reducers/currentOrderSlice"
+import { useCreateOrderMutation } from "@/store/services/orders"
 
 
 
 
 export default function NewAppTable() {
     const dispatch = useDispatch();
-
+    const [createOrder] = useCreateOrderMutation();
+    const userId = useSelector((state) => state.auth.user.id);
     const data = useSelector((state) => state.currentOrder);
-    console.log(data)
+    console.log(userId)
 
     const mappedData = data?.orders.map((order) => {
         return (
@@ -41,8 +43,18 @@ export default function NewAppTable() {
     })
 
     const submitToDB = () => {
-        alert("Заявка успішно збережена")
-        // save to DB logic here
+        const mappedData = data?.orders.map((order) => ({
+            productId: order.product.value,
+            description: order.description,
+            unitId: order.unit.value,
+            quantityCreated: parseFloat(order.quantity)
+        }))
+        try {
+            const payload = createOrder({ data: mappedData, creatorId: userId }).unwrap();
+            console.log(payload)
+        } catch (error) {
+            console.log(error)
+        }
         dispatch(clearOrders())
     }
 

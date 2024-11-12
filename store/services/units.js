@@ -15,21 +15,23 @@ export const unitsApi = createApi({
                 method: "POST",
                 body: data,
             }),
-            onQueryStarted: async ({ ...data }, { dispatch, queryFulfilled }) => {
+            invalidatesTags: ["Units"],
+/*             onQueryStarted: async ({ ...data }, { dispatch, queryFulfilled }) => {
                 const patchResult = dispatch(
                     unitsApi.util.updateQueryData("getAllUnits", {}, (draft) => {
                         Object.assign(draft, data);
                     })
                 );
                 dispatch(unitsApi.util.invalidateTags(["Units"]));
-            },
+            }, */
         }),
         deleteUnit: builder.mutation({
             query: (id) => ({
                 url: `delete?id=${id}`,
                 method: "DELETE",
             }),
-            onQueryStarted: async ({id},{ dispatch, queryFulfilled }) => {
+            invalidatesTags: ["Units"],
+/*             onQueryStarted: async ({id},{ dispatch, queryFulfilled }) => {
                 const patchResult = dispatch(
                     unitsApi.util.updateQueryData(
                         'getAllUnits', id, 
@@ -39,7 +41,7 @@ export const unitsApi = createApi({
                     )
                 );
                 dispatch(unitsApi.util.invalidateTags(['Units']))
-            },
+            }, */
         }),
     }),
 });

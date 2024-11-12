@@ -15,7 +15,8 @@ export const usersApi = createApi({
                 method: "POST",
                 body: data,
             }),
-            onQueryStarted: async ({...data},{ dispatch, queryFulfilled }) => {
+            invalidatesTags: ['Users'],
+/*             onQueryStarted: async ({...data},{ dispatch, queryFulfilled }) => {
                 const patchResult = dispatch(
                     usersApi.util.updateQueryData(
                         'getAllUsers', {...data}, 
@@ -25,7 +26,7 @@ export const usersApi = createApi({
                     )
                 );
                 dispatch(usersApi.util.invalidateTags(['Users']))
-            },
+            }, */
         }),
         editUser: builder.mutation({
             query: ({ ...data }) => ({
@@ -33,7 +34,8 @@ export const usersApi = createApi({
                 method: "PUT",
                 body: data,
             }),
-            onQueryStarted: async ({...data},{ dispatch, queryFulfilled }) => {
+            invalidatesTags: ['Users'],
+/*             onQueryStarted: async ({...data},{ dispatch, queryFulfilled }) => {
                 const patchResult = dispatch(
                     usersApi.util.updateQueryData(
                         'getAllUsers', {...data}, 
@@ -43,14 +45,15 @@ export const usersApi = createApi({
                     )
                 );
                 dispatch(usersApi.util.invalidateTags(['Users']))
-            },
+            }, */
         }),
         deleteUser: builder.mutation({
             query: (id) => ({
                 url: `delete?id=${id}`,
                 method: "DELETE",
             }),
-            onQueryStarted: async ({id},{ dispatch, queryFulfilled }) => {
+            invalidatesTags: ['Users'],
+/*             onQueryStarted: async ({id},{ dispatch, queryFulfilled }) => {
                 const patchResult = dispatch(
                     usersApi.util.updateQueryData(
                         'getAllUsers', id, 
@@ -60,7 +63,7 @@ export const usersApi = createApi({
                     )
                 );
                 dispatch(usersApi.util.invalidateTags(['Users']))
-            },
+            }, */
         })
     }),
 })

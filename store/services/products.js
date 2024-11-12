@@ -35,7 +35,8 @@ export const productsApi = createApi({
                 method: "PUT",
                 body: data,
             }),
-            onQueryStarted: async ({ ...data }, { dispatch, queryFulfilled }) => {
+            invalidatesTags: ["Products"],
+/*             onQueryStarted: async ({ ...data }, { dispatch, queryFulfilled }) => {
                 const patchResult = dispatch(
                     productsApi.util.updateQueryData(
                         "getAllProducts",
@@ -46,7 +47,7 @@ export const productsApi = createApi({
                     )
                 );
                 dispatch(productsApi.util.invalidateTags(["Products"]));
-            },
+            }, */
         }),
     }),
 });

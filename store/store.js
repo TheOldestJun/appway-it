@@ -4,6 +4,7 @@ import currentOrderReducers from "./reducers/currentOrderSlice";
 import { usersApi } from "./services/users";
 import { unitsApi } from "./services/units";
 import { productsApi } from "./services/products";
+import { ordersApi } from "./services/orders";
 
 export const makeStore = () => {
   return configureStore({
@@ -12,9 +13,10 @@ export const makeStore = () => {
       currentOrder: currentOrderReducers,
       [usersApi.reducerPath]: usersApi.reducer,
       [unitsApi.reducerPath]: unitsApi.reducer,
-      [productsApi.reducerPath]: productsApi.reducer
+      [productsApi.reducerPath]: productsApi.reducer,
+      [ordersApi.reducerPath]: ordersApi.reducer
     },
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat([usersApi.middleware, unitsApi.middleware, productsApi.middleware]),
+      getDefaultMiddleware().concat([usersApi.middleware, unitsApi.middleware, productsApi.middleware, ordersApi.middleware]),
   });
 };
