@@ -20,6 +20,8 @@ export default function NewApplication() {
 
     const handleSubmitLine = () => {
         dispatch(addOrder({ description, quantity }))
+        setDescription('')
+        setQuantity(1.0)
         dispatch(clearLine())
     }
 

@@ -15,7 +15,8 @@ export const productsApi = createApi({
                 method: "POST",
                 body: data,
             }),
-            onQueryStarted: async ({ ...data }, { dispatch, queryFulfilled }) => {
+            invalidatesTags: ["Products"],
+/*             onQueryStarted: async ({ ...data }, { dispatch, queryFulfilled }) => {
                 const patchResult = dispatch(
                     productsApi.util.updateQueryData(
                         "getAllProducts",
@@ -26,7 +27,7 @@ export const productsApi = createApi({
                     )
                 );
                 dispatch(productsApi.util.invalidateTags(["Products"]));
-            },
+            }, */
         }),
         editProduct: builder.mutation({
             query: ({ ...data }) => ({

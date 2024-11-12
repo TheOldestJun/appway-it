@@ -1,14 +1,17 @@
-import { Label } from "../ui/label"
 import ComboBox from "./comboBox"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useGetAllUnitsQuery, useCreateUnitMutation } from "@/store/services/units"
 import { InputSkeleton } from "../skeletons"
 import { ServerError } from "../alerts"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { setUnit } from "@/store/reducers/currentOrderSlice"
 import toast from 'react-hot-toast';
 
 export default function Units() {
+    const unit = useSelector(state => state.currentOrder.unit)
+    useEffect(() => {
+        setSelectedUnits(unit)
+    }, [unit])
     const [selectedUnits, setSelectedUnits] = useState()
     const dispatch = useDispatch()
 

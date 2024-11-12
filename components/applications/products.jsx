@@ -1,15 +1,19 @@
 
 import ComboBox from "./comboBox"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useGetAllProductsQuery, useCreateProductMutation } from "@/store/services/products"
 import { ServerError } from "../alerts"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { setProduct } from "@/store/reducers/currentOrderSlice"
 import { InputSkeleton } from "../skeletons"
 import toast from 'react-hot-toast';
 
 
 export default function Products() {
+    const product = useSelector(state => state.currentOrder.product)
+    useEffect(() => {
+        setSelectedProduct(product)
+    }, [product])
     const dispatch = useDispatch()
     const [selectedProduct, setSelectedProduct] = useState()
 
