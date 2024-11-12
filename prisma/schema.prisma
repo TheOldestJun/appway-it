@@ -19,7 +19,6 @@ model User {
   ordersCreated   Order[] @relation("createdBy")
   ordersApproved  Order[] @relation("approvedBy")
   ordersOrdered   Order[] @relation("orderedBy")
-  ordersDelivered Order[] @relation("deliveredBy")
   ordersReceived  Order[] @relation("receivedBy")
 }
 
@@ -55,7 +54,6 @@ model Order {
   quantityCreated   Float
   quantityOrdered   Float?
   quantityDelivered Float?
-  quantityGivenOut  Float?
   // applicants data
   createdBy         User     @relation(name: "createdBy", fields: [creatorId], references: [id])
   creatorId         String
@@ -72,14 +70,10 @@ model Order {
   orderedBy         User?     @relation(name: "orderedBy", fields: [orderedById], references: [id])
   orderedById       String?
   orderedDate       DateTime? @db.Date
-  deliveredBy       User?     @relation(name: "deliveredBy", fields: [deliveredById], references: [id])
-  deliveredById     String?
-  deliveredDate     DateTime? @db.Date
   // warehouse data
   receivedBy        User?     @relation(name: "receivedBy", fields: [receivedById], references: [id])
   receivedById      String?
   receivedDate      DateTime? @db.Date
-  givenOutDate      DateTime? @db.Date
 }
 
 enum OrderStatus {
