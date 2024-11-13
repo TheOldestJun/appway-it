@@ -19,7 +19,7 @@ export default function Units() {
 
     const handleCreateUnits = async (value) => {
         try {
-            const payload = await createUnit({ title: value.toUpperCase() })
+            const payload = await createUnit({ title: value })
             if (payload) toast.success('Одиницю виміру успішно додано')
         } catch (error) {
             toast.error(error)

@@ -1,7 +1,7 @@
 import { useGetAllOrdersByUserIdQuery } from "@/store/services/orders"
 import { useSelector } from "react-redux"
 
-import { getOrderStatus } from "@/lib/functions"
+import { getOrderStatus, formatDate } from "@/lib/functions"
 
 import {
     Table,
@@ -49,8 +49,19 @@ export default function AllApplications() {
                         </TableCell>
                     </TableRow>
                 </HoverCardTrigger>
-                <HoverCardContent className="w-[300px]">
-                    <p className="text-sm text-muted-foreground">Order information</p>
+                <HoverCardContent className="w-[500px]">
+                    <p className="text-sm text-slate-900 text-center">Детальна інформація</p>
+                    <hr />
+                    <p className="text-sm text-slate-500">Дата заявки: {formatDate(order.createdDate)}</p>
+                    {order.approvedDate &&
+                        <p className="text-sm text-slate-500">
+                            Погоджено: {`${order.approvedBy.firstName} ${order.approvedBy.lastName}`} {formatDate(order.approvedDate)}
+                        </p>}
+                    {order.orderedDate &&
+                        <p className="text-sm text-slate-500">
+                            Замовлено: {`${order.quantityOrdered} ${order.unit.title}. ${order.orderedBy.firstName} ${order.orderedBy.lastName}`} {formatDate(order.orderedDate)}
+                        </p>}
+
                 </HoverCardContent>
             </HoverCard>
         )

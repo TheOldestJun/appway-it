@@ -6,8 +6,10 @@ import { useState } from "react"
 import { useRouter, useSearchParams } from 'next/navigation';
 import axios from "axios"
 import toast from 'react-hot-toast';
+import { Suspense } from 'react'
 
-export default function Page() {
+
+function ResetPassword() {
     const [password, setPassword] = useState('')
     const [passwordConfirmation, setPasswordConfirmation] = useState('')
     const [success, setSuccess] = useState(false)
@@ -63,5 +65,13 @@ export default function Page() {
 
             </div>
         </div>
+    )
+}
+
+export default function Page() {
+    return (
+        <Suspense>
+            <ResetPassword  />
+        </Suspense>
     )
 }
