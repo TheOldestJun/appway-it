@@ -24,10 +24,8 @@ import toast from "react-hot-toast"
 
 
 export default function AllApplications() {
-    const userId = useSelector((state) => state.auth.user.id);
-    if (userId) {
-        var { data: orders, isLoading, error } = useGetAllOrdersByUserIdQuery(userId)
-    }
+    const user = useSelector((state) => state.auth.user);
+    const { data: orders, isLoading, error } = useGetAllOrdersByUserIdQuery(user?.id)
 
 
     const mappedData = orders?.map((order, index) => {
