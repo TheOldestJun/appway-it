@@ -17,7 +17,11 @@ export const ordersApi = createApi({
             }),
             invalidatesTags: ["Orders"],
         }),
+        getAllOrdersByUserId: builder.query({
+            query: (id) => `get-all-by-user-id?id=${id}`,
+            providesTags: (result, error, userId) => [{ type: "Orders", id: userId }],
+        }),
     }),
 });
 
-export const { useCreateOrderMutation, useGetAllOrdersQuery } = ordersApi;
+export const { useCreateOrderMutation, useGetAllOrdersQuery, useGetAllOrdersByUserIdQuery } = ordersApi;

@@ -45,7 +45,8 @@ model Unit {
 model Order {
   id                String  @id @default(cuid())
   // product data  
-  status            OrderStatus // depends on fields [quantityCreated, approved, quantityOrdered, quantityDelivered, quantityGivenOut, closerId]
+  // status depends on [createdDate, approvedDate, orderedDate, receivedDate, closedDate]
+  status            OrderStatus 
   product           Product  @relation(fields: [productId], references: [id])
   productId         String
   description       String?
@@ -58,14 +59,11 @@ model Order {
   createdBy         User     @relation(name: "createdBy", fields: [creatorId], references: [id])
   creatorId         String
   createdDate       DateTime @default(now()) @db.Date
-  closed            Boolean  @default(false)
-  closerId          String?
   closedDate        DateTime? @db.Date
   // directors data
   approvedBy        User?     @relation(name: "approvedBy", fields: [approverId], references: [id])
   approverId        String?
   approvedDate      DateTime? @db.Date
-  approved          Boolean @default(false)
   // executors data
   orderedBy         User?     @relation(name: "orderedBy", fields: [orderedById], references: [id])
   orderedById       String?
@@ -80,8 +78,6 @@ enum OrderStatus {
   CREATED
   APPROVED
   ORDERED
-  DELIVERED
-  GIVENOUT
   RECEIVED
   CLOSED
 }
