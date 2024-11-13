@@ -1,6 +1,8 @@
 import { useGetAllOrdersByUserIdQuery } from "@/store/services/orders"
 import { useSelector } from "react-redux"
 
+import { getOrderStatus } from "@/lib/functions"
+
 import {
     Table,
     TableBody,
@@ -11,32 +13,50 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { Button } from "../ui/button"
+import {
+    HoverCard,
+    HoverCardContent,
+    HoverCardTrigger,
+} from "@/components/ui/hover-card"
+
 import toast from "react-hot-toast"
 
 
 
 export default function AllApplications() {
     const userId = useSelector((state) => state.auth.user.id);
-    const { data: orders, isLoading, error } = useGetAllOrdersByUserIdQuery(userId)
+    if (userId) {
+        var { data: orders, isLoading, error } = useGetAllOrdersByUserIdQuery(userId)
+    }
 
-    /*     const mappedData = orders?.map((order) => {
-            return (
-                <TableRow key={order.id}>
-                    <TableCell>{order.product.label}</TableCell>
-                    <TableCell>{order.description}</TableCell>
-                    <TableCell className="text-right">{order.unit.label}</TableCell>
-                    <TableCell className="text-right">{order.quantity}</TableCell>
-                    <TableCell className="text-right">
-                        <Button
-                            variant="ghost"
-                            className="text-lg text-red-600 font-extrabold"
-                            onClick={() => { dispatch(removeOrder(order.id)) }} >
-                            X
-                        </Button>
-                    </TableCell>
-                </TableRow>
-            )
-        }) */
+
+    const mappedData = orders?.map((order, index) => {
+        return (
+            <HoverCard key={order.id}>
+                <HoverCardTrigger asChild>
+                    <TableRow>
+                        <TableCell>{index + 1}</TableCell>
+                        <TableCell>{order.product.title}</TableCell>
+                        <TableCell>{order.description}</TableCell>
+                        <TableCell className="text-right">{order.unit.title}</TableCell>
+                        <TableCell className="text-right">{order.quantityCreated}</TableCell>
+                        <TableCell className="text-right">{getOrderStatus(order.status)}</TableCell>
+                        <TableCell className="text-right">
+                            <Button
+                                variant="ghost"
+                                className="text-lg text-red-600 font-extrabold"
+                                onClick={() => { toast.error("Функціонал в розробці") }} >
+                                X
+                            </Button>
+                        </TableCell>
+                    </TableRow>
+                </HoverCardTrigger>
+                <HoverCardContent className="w-[300px]">
+                    <p className="text-sm text-muted-foreground">Order information</p>
+                </HoverCardContent>
+            </HoverCard>
+        )
+    })
 
     return (
         <>
@@ -54,7 +74,7 @@ export default function AllApplications() {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {/* {mappedData} */}
+                    {mappedData}
                 </TableBody>
             </Table>
         </>
