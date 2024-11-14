@@ -25,7 +25,7 @@ export default function ClientAdmin({roles}) {
     }, [user])
 
     return (
-        <div>
+        <>
             <Tabs defaultValue="users" className="w-full">
                 <TabsList className="w-full">
                     <TabsTrigger value="users">Користувачі</TabsTrigger>
@@ -56,6 +56,6 @@ export default function ClientAdmin({roles}) {
                 </TabsContent>
                 <TabsContent value="dummy">Dummy here...</TabsContent>
             </Tabs>
-        </div>
+        </>
     )
 }

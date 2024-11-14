@@ -17,7 +17,7 @@ export default function Applicants() {
         }
     }, [user])
     return (
-        <div>
+        <>
             <Tabs defaultValue="applications" className="w-full">
                 <TabsList className="w-full">
                     <TabsTrigger value="applications">Поточні заявки</TabsTrigger>
@@ -30,6 +30,6 @@ export default function Applicants() {
                     <div className="my-10 mx-20"><NewApplication /></div>
                 </TabsContent>
             </Tabs>
-        </div>
+        </>
     )
 }

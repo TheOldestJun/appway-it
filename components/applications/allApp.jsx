@@ -26,6 +26,8 @@ import {
 
 import toast from "react-hot-toast"
 import { FcApproval, FcCancel } from "react-icons/fc";
+import { AllOrdersSkeleton } from "../skeletons"
+import { ServerError } from "../alerts"
 
 
 
@@ -35,6 +37,9 @@ export default function AllApplications() {
     const { data: orders, isLoading, error } = useGetAllOrdersByUserIdQuery(user?.id)
     const [setDeleted] = useSetDeletedMutation()
     const [setClosed] = useSetClosedMutation()
+
+    if (isLoading) return <AllOrdersSkeleton />
+    if (error) return <ServerError error={error} />
 
     const handleDelete = async (id) => {
         try {

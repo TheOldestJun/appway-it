@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const ordersApi = createApi({
     reducerPath: "ordersApi",
     baseQuery: fetchBaseQuery({ baseUrl: "/api/orders/" }),
-    tagTypes: ["Orders"],
+    tagTypes: ["Orders", "NotApproved"],
     endpoints: (builder) => ({
         getAllOrders: builder.query({
             query: () => "get-all",
@@ -35,6 +35,18 @@ export const ordersApi = createApi({
             }),
             invalidatesTags: ["Orders"],
         }),
+        getNotApproved: builder.query({
+            query: () => "get-not-approved",
+            providesTags: ["NotApproved"],
+        }),
+        setApproved: builder.mutation({
+            query: ({ id, approverId }) => ({
+                url: "set-approved",
+                method: "PUT",
+                body: { id, approverId },
+            }),
+            invalidatesTags: ["NotApproved"],
+        }),
     }),
 });
 
@@ -43,4 +55,6 @@ export const {
     useGetAllOrdersQuery, 
     useGetAllOrdersByUserIdQuery,
     useSetDeletedMutation,
-    useSetClosedMutation } = ordersApi;
+    useSetClosedMutation,
+    useGetNotApprovedQuery,
+    useSetApprovedMutation } = ordersApi;
