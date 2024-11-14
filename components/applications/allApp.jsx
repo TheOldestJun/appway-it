@@ -18,6 +18,11 @@ import {
     HoverCardContent,
     HoverCardTrigger,
 } from "@/components/ui/hover-card"
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover"
 
 import toast from "react-hot-toast"
 import { FcApproval, FcCancel } from "react-icons/fc";
@@ -61,22 +66,34 @@ export default function AllApplications() {
                         <TableCell className="text-right">{order.quantityCreated}</TableCell>
                         <TableCell className="text-right">{getOrderStatus(order.status)}</TableCell>
                         <TableCell className="text-right">
-                            <Button
-                                variant="ghost"
-                                disabled={order.closedDate !== null}
-                                className="text-lg text-red-600 font-extrabold"
-                                onClick={() => { handleClose(order.id) }} >
-                                <FcApproval />
-                            </Button>
+                            <Popover>
+                                <PopoverTrigger asChild>
+                                    <Button
+                                        variant="ghost"
+                                        disabled={order.closedDate !== null}>
+                                        <FcApproval />
+                                    </Button>
+                                </PopoverTrigger>
+                                <PopoverContent className="w-[120px]">
+                                    <p className="text-sm">Ви впевнені?</p>
+                                    <Button variant="destructive" className="mt-2 w-full" onClick={() => { handleClose(order.id) }}>Так</Button>
+                                </PopoverContent>
+                            </Popover>
                         </TableCell>
                         <TableCell className="text-right">
-                            <Button
-                                variant="ghost"
-                                disabled={order.closedDate === null}
-                                className="text-lg text-red-600 font-extrabold"
-                                onClick={() => handleDelete(order.id)} >
-                                <FcCancel />
-                            </Button>
+                            <Popover>
+                                <PopoverTrigger asChild>
+                                    <Button
+                                        variant="ghost"
+                                        disabled={order.closedDate === null}>
+                                        <FcCancel />
+                                    </Button>
+                                </PopoverTrigger>
+                                <PopoverContent className="w-[120px]">
+                                    <p className="text-sm">Ви впевнені?</p>
+                                    <Button variant="destructive" className="mt-2 w-full" onClick={() => { handleDelete(order.id) }}>Так</Button>
+                                </PopoverContent>
+                            </Popover>
                         </TableCell>
                     </TableRow>
                 </HoverCardTrigger>
