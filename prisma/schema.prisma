@@ -47,6 +47,7 @@ model Order {
   // product data  
   // status depends on [createdDate, approvedDate, orderedDate, receivedDate, closedDate]
   status            OrderStatus 
+  deleted           Boolean @default(false) //flag to show or not to applicants
   product           Product  @relation(fields: [productId], references: [id])
   productId         String
   description       String?

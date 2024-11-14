@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/hover-card"
 
 import toast from "react-hot-toast"
+import { FcApproval, FcCancel } from "react-icons/fc";
 
 
 
@@ -42,9 +43,18 @@ export default function AllApplications() {
                         <TableCell className="text-right">
                             <Button
                                 variant="ghost"
+                                disabled={order.closedDate !== null}
                                 className="text-lg text-red-600 font-extrabold"
                                 onClick={() => { toast.error("Функціонал в розробці") }} >
-                                X
+                                <FcApproval />
+                            </Button>
+                        </TableCell>
+                        <TableCell className="text-right">
+                            <Button
+                                variant="ghost"
+                                className="text-lg text-red-600 font-extrabold"
+                                onClick={() => { toast.error("Функціонал в розробці") }} >
+                                <FcCancel />
                             </Button>
                         </TableCell>
                     </TableRow>
@@ -61,7 +71,14 @@ export default function AllApplications() {
                         <p className="text-sm text-slate-500">
                             Замовлено: {`${order.quantityOrdered} ${order.unit.title}. ${order.orderedBy.firstName} ${order.orderedBy.lastName}`} {formatDate(order.orderedDate)}
                         </p>}
-
+                    {order.receivedDate &&
+                        <p className="text-sm text-slate-500">
+                            Прийнято на склад: {`${order.quantityDelivered} ${order.unit.title}. ${order.receivedBy.firstName} ${order.receivedBy.lastName}`} {formatDate(order.receivedDate)}
+                        </p>}
+                    {order.closedDate &&
+                        <p className="text-sm text-slate-500">
+                            Закрито: {formatDate(order.closedDate)}
+                        </p>}
                 </HoverCardContent>
             </HoverCard>
         )
@@ -80,6 +97,7 @@ export default function AllApplications() {
                         <TableHead className="text-right">Кількість</TableHead>
                         <TableHead className="text-right">Стан</TableHead>
                         <TableHead className="text-right">Закрити</TableHead>
+                        <TableHead className="text-right">Видалити</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
