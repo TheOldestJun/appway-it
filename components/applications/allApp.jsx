@@ -1,4 +1,4 @@
-import { useGetAllOrdersByUserIdQuery } from "@/store/services/orders"
+import { useGetAllOrdersByUserIdQuery, useSetDeletedMutation, useSetClosedMutation } from "@/store/services/orders"
 import { useSelector } from "react-redux"
 
 import { getOrderStatus, formatDate } from "@/lib/functions"
@@ -24,10 +24,30 @@ import { FcApproval, FcCancel } from "react-icons/fc";
 
 
 
+
 export default function AllApplications() {
     const user = useSelector((state) => state.auth.user);
     const { data: orders, isLoading, error } = useGetAllOrdersByUserIdQuery(user?.id)
+    const [setDeleted] = useSetDeletedMutation()
+    const [setClosed] = useSetClosedMutation()
 
+    const handleDelete = async (id) => {
+        try {
+            const payload = await setDeleted(id)
+            if (payload) toast.success("Заявку успішно видалено")
+        } catch (error) {
+            toast.error(error);
+        }
+    }
+
+    const handleClose = async (id) => {
+        try {
+            const payload = await setClosed(id)
+            if (payload) toast.success("Заявку успішно закрито")
+        } catch (error) {
+            toast.error(error);
+        }
+    }
 
     const mappedData = orders?.map((order, index) => {
         return (
@@ -45,15 +65,16 @@ export default function AllApplications() {
                                 variant="ghost"
                                 disabled={order.closedDate !== null}
                                 className="text-lg text-red-600 font-extrabold"
-                                onClick={() => { toast.error("Функціонал в розробці") }} >
+                                onClick={() => { handleClose(order.id) }} >
                                 <FcApproval />
                             </Button>
                         </TableCell>
                         <TableCell className="text-right">
                             <Button
                                 variant="ghost"
+                                disabled={order.closedDate === null}
                                 className="text-lg text-red-600 font-extrabold"
-                                onClick={() => { toast.error("Функціонал в розробці") }} >
+                                onClick={() => handleDelete(order.id)} >
                                 <FcCancel />
                             </Button>
                         </TableCell>

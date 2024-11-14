@@ -7,7 +7,7 @@ export async function GET(request) {
     try {
         const orders = await prisma.order.findMany({
             where: {
-                creatorId: id
+                AND: [{ creatorId: id }, { deleted: false }],
             },
             select: {
                 id: true,

@@ -16,17 +16,6 @@ export const usersApi = createApi({
                 body: data,
             }),
             invalidatesTags: ['Users'],
-/*             onQueryStarted: async ({...data},{ dispatch, queryFulfilled }) => {
-                const patchResult = dispatch(
-                    usersApi.util.updateQueryData(
-                        'getAllUsers', {...data}, 
-                        (draft) => {
-                            Object.assign(draft, data)
-                        }
-                    )
-                );
-                dispatch(usersApi.util.invalidateTags(['Users']))
-            }, */
         }),
         editUser: builder.mutation({
             query: ({ ...data }) => ({
@@ -35,17 +24,6 @@ export const usersApi = createApi({
                 body: data,
             }),
             invalidatesTags: ['Users'],
-/*             onQueryStarted: async ({...data},{ dispatch, queryFulfilled }) => {
-                const patchResult = dispatch(
-                    usersApi.util.updateQueryData(
-                        'getAllUsers', {...data}, 
-                        (draft) => {
-                            Object.assign(draft, data)
-                        }
-                    )
-                );
-                dispatch(usersApi.util.invalidateTags(['Users']))
-            }, */
         }),
         deleteUser: builder.mutation({
             query: (id) => ({
@@ -53,17 +31,6 @@ export const usersApi = createApi({
                 method: "DELETE",
             }),
             invalidatesTags: ['Users'],
-/*             onQueryStarted: async ({id},{ dispatch, queryFulfilled }) => {
-                const patchResult = dispatch(
-                    usersApi.util.updateQueryData(
-                        'getAllUsers', id, 
-                        (draft) => {
-                            Object.assign(draft, id)
-                        }
-                    )
-                );
-                dispatch(usersApi.util.invalidateTags(['Users']))
-            }, */
         })
     }),
 })

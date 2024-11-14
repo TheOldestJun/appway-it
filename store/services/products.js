@@ -16,18 +16,6 @@ export const productsApi = createApi({
                 body: data,
             }),
             invalidatesTags: ["Products"],
-/*             onQueryStarted: async ({ ...data }, { dispatch, queryFulfilled }) => {
-                const patchResult = dispatch(
-                    productsApi.util.updateQueryData(
-                        "getAllProducts",
-                        {},
-                        (draft) => {
-                            Object.assign(draft, data);
-                        }
-                    )
-                );
-                dispatch(productsApi.util.invalidateTags(["Products"]));
-            }, */
         }),
         editProduct: builder.mutation({
             query: ({ ...data }) => ({
@@ -36,18 +24,6 @@ export const productsApi = createApi({
                 body: data,
             }),
             invalidatesTags: ["Products"],
-/*             onQueryStarted: async ({ ...data }, { dispatch, queryFulfilled }) => {
-                const patchResult = dispatch(
-                    productsApi.util.updateQueryData(
-                        "getAllProducts",
-                        {},
-                        (draft) => {
-                            Object.assign(draft, data);
-                        }
-                    )
-                );
-                dispatch(productsApi.util.invalidateTags(["Products"]));
-            }, */
         }),
     }),
 });
