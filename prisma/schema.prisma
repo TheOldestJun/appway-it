@@ -65,6 +65,7 @@ model Order {
   approvedBy        User?     @relation(name: "approvedBy", fields: [approverId], references: [id])
   approverId        String?
   approvedDate      DateTime? @db.Date
+  rejectedReason    String?
   // executors data
   orderedBy         User?     @relation(name: "orderedBy", fields: [orderedById], references: [id])
   orderedById       String?
@@ -78,6 +79,7 @@ model Order {
 enum OrderStatus {
   CREATED
   APPROVED
+  REJECTED
   ORDERED
   RECEIVED
   CLOSED

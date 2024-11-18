@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const ordersApi = createApi({
     reducerPath: "ordersApi",
     baseQuery: fetchBaseQuery({ baseUrl: "/api/orders/" }),
-    tagTypes: ["Orders", "NotApproved"],
+    tagTypes: ["Orders", "NotApproved", "Rejected"],
     endpoints: (builder) => ({
         getAllOrders: builder.query({
             query: () => "get-all",
@@ -47,6 +47,10 @@ export const ordersApi = createApi({
             }),
             invalidatesTags: ["NotApproved"],
         }),
+        getRejected: builder.query({
+            query: () => "get-rejected",
+            providesTags: ["Rejected"],
+        }),
     }),
 });
 
@@ -57,4 +61,5 @@ export const {
     useSetDeletedMutation,
     useSetClosedMutation,
     useGetNotApprovedQuery,
-    useSetApprovedMutation } = ordersApi;
+    useSetApprovedMutation,
+    useGetRejectedQuery } = ordersApi;
