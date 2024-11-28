@@ -1,8 +1,7 @@
 "use client";
 
-import { useRef } from "react";
 import { Provider } from "react-redux";
-import { makeStore } from "@/store/store";
+import { store } from "@/store/store";
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/navigation';
@@ -25,14 +24,8 @@ const AuthProvider = ({ children }) => {
 
 
 export default function Providers({ children }) {
-  const storeRef = useRef();
-  if (!storeRef.current) {
-    storeRef.current = makeStore();
-  }
-
-
   return (
-    <Provider store={storeRef.current}>
+    <Provider store={store}>
       <AuthProvider>
         {children}
       </AuthProvider>

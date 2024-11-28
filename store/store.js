@@ -5,9 +5,9 @@ import { usersApi } from "./services/users";
 import { unitsApi } from "./services/units";
 import { productsApi } from "./services/products";
 import { ordersApi } from "./services/orders";
+import { setupListeners } from "@reduxjs/toolkit/query";
 
-export const makeStore = () => {
-  return configureStore({
+export const store =  configureStore({
     reducer: {
       auth: authReducers,
       currentOrder: currentOrderReducers,
@@ -19,4 +19,4 @@ export const makeStore = () => {
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat([usersApi.middleware, unitsApi.middleware, productsApi.middleware, ordersApi.middleware]),
   });
-};
+setupListeners(store.dispatch);
