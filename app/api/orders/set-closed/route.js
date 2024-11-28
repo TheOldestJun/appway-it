@@ -5,14 +5,13 @@ import { OrderStatus } from "@prisma/client";
 export async function PUT(request) {
     const searchParams = request.nextUrl.searchParams;
     const id = searchParams.get("id");
-    const today = new Date();
     try {
         const result = await prisma.order.update({
             where: {
                 id: id,
             },
             data: {
-                closedDate: today,
+                closedDate: new Date(),
                 status: OrderStatus.CLOSED
             },
         });

@@ -1,6 +1,7 @@
 import prisma from "@/prisma";
 import { NextResponse } from "next/server";
 import { OrderStatus } from "@prisma/client";
+import { productsApi } from "@/store/services/products";
 
 export async function GET(request) {
     try {
@@ -8,6 +9,28 @@ export async function GET(request) {
             where: {
                 status: OrderStatus.CREATED,
             },
+            select:{
+                id: true,
+                product:{
+                    select: {
+                        title: true
+                    }
+                },
+                description: true,
+                unit: {
+                    select: {
+                        title: true
+                    }
+                },
+                quantityCreated: true,
+                createdBy: {
+                    select: {
+                        firstName: true,
+                        lastName: true
+                    }
+                },
+                createdDate: true,
+            }
         });
         return NextResponse.json(orders);
     } catch (error) {

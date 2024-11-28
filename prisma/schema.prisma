@@ -20,6 +20,7 @@ model User {
   ordersApproved  Order[] @relation("approvedBy")
   ordersOrdered   Order[] @relation("orderedBy")
   ordersReceived  Order[] @relation("receivedBy")
+  ordersRejected  Order[] @relation("rejectedBy")
 }
 
 model Role {
@@ -65,6 +66,9 @@ model Order {
   approvedBy        User?     @relation(name: "approvedBy", fields: [approverId], references: [id])
   approverId        String?
   approvedDate      DateTime? @db.Date
+  rejectedBy        User?     @relation(name: "rejectedBy", fields: [rejectedById], references: [id])
+  rejectedById      String?
+  rejectedDate      DateTime? @db.Date
   rejectedReason    String?
   // executors data
   orderedBy         User?     @relation(name: "orderedBy", fields: [orderedById], references: [id])

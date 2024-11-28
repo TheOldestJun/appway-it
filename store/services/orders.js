@@ -51,6 +51,14 @@ export const ordersApi = createApi({
             query: () => "get-rejected",
             providesTags: ["Rejected"],
         }),
+        setRejected: builder.mutation({
+            query: ({ id, rejectedById, rejectedReason }) => ({
+                url: "set-rejected",
+                method: "PUT",
+                body: { id, rejectedById, rejectedReason },
+            }),
+            invalidatesTags: ["Rejected"],
+        }),
     }),
 });
 
