@@ -46,7 +46,7 @@ export const ordersApi = createApi({
                 method: "PUT",
                 body: { id, approverId },
             }),
-            invalidatesTags: ["NotApproved"],
+            invalidatesTags: ["NotApproved", "Orders"],
         }),
         getRejected: builder.query({
             query: () => "get-rejected",

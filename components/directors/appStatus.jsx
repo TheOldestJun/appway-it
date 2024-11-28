@@ -1,5 +1,9 @@
+import GeneralAppData from "../generalAppData"
+
 export default function AppStatus() {
     return (
-        <div>App Status</div>
+        <>
+            <GeneralAppData />
+        </>
     )
 }
