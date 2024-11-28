@@ -63,7 +63,7 @@ export default function AllApplications() {
         return (
             <HoverCard key={order.id}>
                 <HoverCardTrigger asChild>
-                    <TableRow>
+                    <TableRow className="hover:bg-gray-100 hover:cursor-pointer">
                         <TableCell>{index + 1}</TableCell>
                         <TableCell>{order.product.title}</TableCell>
                         <TableCell>{order.description}</TableCell>

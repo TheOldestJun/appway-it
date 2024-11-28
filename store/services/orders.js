@@ -4,6 +4,7 @@ export const ordersApi = createApi({
     reducerPath: "ordersApi",
     baseQuery: fetchBaseQuery({ baseUrl: "/api/orders/" }),
     tagTypes: ["Orders", "NotApproved", "Rejected"],
+    refetchOnFocus: true,
     endpoints: (builder) => ({
         getAllOrders: builder.query({
             query: () => "get-all",
@@ -15,7 +16,7 @@ export const ordersApi = createApi({
                 method: "POST",
                 body: {data, creatorId},
             }),
-            invalidatesTags: ["Orders"],
+            invalidatesTags: ["Orders", "NotApproved"],
         }),
         getAllOrdersByUserId: builder.query({
             query: (id) => `get-all-by-user-id?id=${id}`,
@@ -57,7 +58,7 @@ export const ordersApi = createApi({
                 method: "PUT",
                 body: { id, rejectedById, rejectedReason },
             }),
-            invalidatesTags: ["Rejected"],
+            invalidatesTags: ["Rejected", "NotApproved"],
         }),
     }),
 });
@@ -70,4 +71,5 @@ export const {
     useSetClosedMutation,
     useGetNotApprovedQuery,
     useSetApprovedMutation,
-    useGetRejectedQuery } = ordersApi;
+    useGetRejectedQuery,
+    useSetRejectedMutation } = ordersApi;

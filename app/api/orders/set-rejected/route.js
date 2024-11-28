@@ -5,6 +5,7 @@ import { OrderStatus } from "@prisma/client";
 export async function PUT(request) {
     const body = await request.json();
     const { id, rejectedById, rejectedReason } = body;
+    console.log(body);
     try {
         const result = await prisma.order.update({
             where: {
@@ -17,6 +18,7 @@ export async function PUT(request) {
                 rejectedDate: new Date()
             }
         })
+        return NextResponse.json(result, { status: 200 });
     } catch (error) {
         return NextResponse.json({ error: error.message }, { status: 500})
     }
