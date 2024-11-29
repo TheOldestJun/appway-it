@@ -11,6 +11,11 @@ import {
     TableRow,
 } from "@/components/ui/table"
 import { Button } from "../ui/button"
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover"
 
 import toast from "react-hot-toast"
 import { FcCancel } from "react-icons/fc";
@@ -46,7 +51,18 @@ export default function Rejected() {
                 <TableCell className="text-right">{formatDate(order.rejectedDate)}</TableCell>
                 <TableCell className="text-right">{order.rejectedReason}</TableCell>
                 <TableCell className="text-right">
-                    <Button variant="ghost" onClick={() => { handleDelete(order.id) }}><FcCancel /></Button>
+                    <Popover>
+                        <PopoverTrigger asChild>
+                            <Button
+                                variant="ghost">
+                                <FcCancel />
+                            </Button>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-[180px]">
+                            <p className="text-sm">Ви виправили заявку?</p>
+                            <Button variant="destructive" className="mt-2 w-full" onClick={() => { handleDelete(order.id) }}>Так</Button>
+                        </PopoverContent>
+                    </Popover>
                 </TableCell>
             </TableRow>
         )

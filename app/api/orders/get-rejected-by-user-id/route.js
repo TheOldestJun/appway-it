@@ -10,6 +10,9 @@ export async function GET(request) {
             where: {
                 AND: [{ creatorId: id }, { status: OrderStatus.REJECTED }],
             },
+            orderBy: {
+                createdDate: "asc"
+            },
             select: {
                 id: true,
                 product: {

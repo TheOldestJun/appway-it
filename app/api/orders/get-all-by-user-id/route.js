@@ -1,5 +1,6 @@
 import prisma from "@/prisma";
 import { NextResponse } from "next/server";
+import { OrderStatus } from "@prisma/client";
 
 export async function GET(request) {
     const searchParams = request.nextUrl.searchParams;
@@ -7,7 +8,7 @@ export async function GET(request) {
     try {
         const orders = await prisma.order.findMany({
             where: {
-                AND: [{ creatorId: id }, { deleted: false }],
+                AND: [{ creatorId: id }, { deleted: false }, { status: { not: OrderStatus.REJECTED } }],
             },
             select: {
                 id: true,

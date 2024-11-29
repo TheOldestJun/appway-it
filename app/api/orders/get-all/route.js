@@ -1,9 +1,18 @@
 import prisma from "@/prisma";
 import { NextResponse } from "next/server";
+import { OrderStatus } from "@prisma/client";
 
 export async function GET(request) {
     try {
         const orders = await prisma.order.findMany({
+            where: {
+                status: {
+                    not: OrderStatus.REJECTED
+                }
+            },
+            orderBy: {
+                createdDate: "asc"
+            },
             select: {
                 id: true,
                 status: true,

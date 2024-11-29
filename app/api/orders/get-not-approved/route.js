@@ -9,6 +9,9 @@ export async function GET(request) {
             where: {
                 status: OrderStatus.CREATED,
             },
+            orderBy: {
+                createdDate: "asc"
+            },
             select:{
                 id: true,
                 product:{
