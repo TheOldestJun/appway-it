@@ -49,7 +49,7 @@ export const ordersApi = createApi({
             invalidatesTags: ["NotApproved", "Orders"],
         }),
         getRejected: builder.query({
-            query: () => "get-rejected",
+            query: (id) => `get-rejected-by-user-id?id=${id}`,
             providesTags: ["Rejected"],
         }),
         setRejected: builder.mutation({

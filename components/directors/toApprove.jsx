@@ -88,7 +88,7 @@ export default function ToApprove() {
 
     return (
         <Table>
-            <TableCaption>Заявки до узгодження</TableCaption>
+            <TableCaption>Заявки на погодження</TableCaption>
             <TableHeader>
                 <TableRow>
                     <TableHead>Дата</TableHead>
