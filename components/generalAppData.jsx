@@ -31,6 +31,7 @@ export default function GeneralAppData() {
     const mappedData = data.map((order) => {
         return (
             <TableRow key={order.id}>
+                <TableCell>{`${order.createdBy.firstName} ${order.createdBy.lastName}`}</TableCell>
                 <TableCell className="font-medium">{order.product.title}</TableCell>
                 <TableCell>{order.description}</TableCell>
                 <TableCell className="text-right">{order.unit.title}</TableCell>
@@ -60,6 +61,7 @@ export default function GeneralAppData() {
             <TableCaption>Інформація по поточним заявкам</TableCaption>
             <TableHeader>
                 <TableRow>
+                    <TableHead>Заявник</TableHead>
                     <TableHead>Назва ТМЦ</TableHead>
                     <TableHead>Примітки</TableHead>
                     <TableHead className="text-right">Од. вим.</TableHead>

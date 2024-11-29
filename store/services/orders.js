@@ -3,12 +3,18 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const ordersApi = createApi({
     reducerPath: "ordersApi",
     baseQuery: fetchBaseQuery({ baseUrl: "/api/orders/" }),
-    tagTypes: ["Orders", "NotApproved", "Rejected"],
+    tagTypes: ["Orders"],
     refetchOnFocus: true,
     endpoints: (builder) => ({
         getAllOrders: builder.query({
             query: () => "get-all",
-            providesTags: ["Orders"],
+            providesTags: (result) =>
+                result
+                    ? [
+                    ...result.map(({ id }) => ({ type: 'Orders', id })),
+                    { type: 'Orders', id: 'LIST' },
+                    ]
+                    : [{ type: 'Orders', id: 'LIST' }],
         }),
         createOrder: builder.mutation({
             query: ({data, creatorId}) => ({
@@ -16,29 +22,41 @@ export const ordersApi = createApi({
                 method: "POST",
                 body: {data, creatorId},
             }),
-            invalidatesTags: ["Orders", "NotApproved"],
+            invalidatesTags: [{ type: 'Orders', id: 'LIST' }],
         }),
         getAllOrdersByUserId: builder.query({
             query: (id) => `get-all-by-user-id?id=${id}`,
-            providesTags: (result, error, userId) => [{ type: "Orders", id: userId }],
+            providesTags: (result) =>
+                result
+                    ? [
+                    ...result.map(({ id }) => ({ type: 'Orders', id })),
+                    { type: 'Orders', id: 'LIST' },
+                    ]
+                    : [{ type: 'Orders', id: 'LIST' }],
         }),
         setDeleted: builder.mutation({
             query: (id) => ({
                 url: `set-deleted?id=${id}`,
                 method: "PUT",
             }),
-            invalidatesTags: ["Orders"],
+            invalidatesTags: [{ type: 'Orders', id: 'LIST' }],
         }),
         setClosed: builder.mutation({
             query: (id) => ({
                 url: `set-closed?id=${id}`,
                 method: "PUT",
             }),
-            invalidatesTags: ["Orders"],
+            invalidatesTags: [{ type: 'Orders', id: 'LIST' }],
         }),
         getNotApproved: builder.query({
             query: () => "get-not-approved",
-            providesTags: ["NotApproved"],
+            providesTags: (result) =>
+                result
+                    ? [
+                    ...result.map(({ id }) => ({ type: 'Orders', id })),
+                    { type: 'Orders', id: 'LIST' },
+                    ]
+                    : [{ type: 'Orders', id: 'LIST' }],
         }),
         setApproved: builder.mutation({
             query: ({ id, approverId }) => ({
@@ -46,11 +64,17 @@ export const ordersApi = createApi({
                 method: "PUT",
                 body: { id, approverId },
             }),
-            invalidatesTags: ["NotApproved", "Orders"],
+            invalidatesTags: [{ type: 'Orders', id: 'LIST' }],
         }),
         getRejected: builder.query({
             query: (id) => `get-rejected-by-user-id?id=${id}`,
-            providesTags: ["Rejected"],
+            providesTags: (result) =>
+                result
+                    ? [
+                    ...result.map(({ id }) => ({ type: 'Orders', id })),
+                    { type: 'Orders', id: 'LIST' },
+                    ]
+                    : [{ type: 'Orders', id: 'LIST' }],
         }),
         setRejected: builder.mutation({
             query: ({ id, rejectedById, rejectedReason }) => ({
@@ -58,7 +82,14 @@ export const ordersApi = createApi({
                 method: "PUT",
                 body: { id, rejectedById, rejectedReason },
             }),
-            invalidatesTags: ["Rejected", "NotApproved"],
+            invalidatesTags: [{ type: 'Orders', id: 'LIST' }],
+        }),
+        deleteOrder: builder.mutation({
+            query: (id) => ({
+                url: `delete?id=${id}`,
+                method: "DELETE",
+            }),
+            invalidatesTags: [{ type: 'Orders', id: 'LIST' }],
         }),
     }),
 });
@@ -72,4 +103,5 @@ export const {
     useGetNotApprovedQuery,
     useSetApprovedMutation,
     useGetRejectedQuery,
-    useSetRejectedMutation } = ordersApi;
+    useSetRejectedMutation,
+    useDeleteOrderMutation } = ordersApi;

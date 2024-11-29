@@ -27,7 +27,7 @@ export default function Providers({ children }) {
   return (
     <Provider store={store}>
       <AuthProvider>
-        {children}
+          {children}
       </AuthProvider>
     </Provider>
     );

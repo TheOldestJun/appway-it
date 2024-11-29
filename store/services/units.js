@@ -7,7 +7,13 @@ export const unitsApi = createApi({
     endpoints: (builder) => ({
         getAllUnits: builder.query({
             query: () => "get-all",
-            providesTags: ["Units"],
+            providesTags: (result) =>
+                result
+                    ? [
+                    ...result.map(({ id }) => ({ type: 'Units', id })),
+                    { type: 'Units', id: 'LIST' },
+                    ]
+                    : [{ type: 'Units', id: 'LIST' }],
         }),
         createUnit: builder.mutation({
             query: ({ ...data }) => ({
@@ -15,14 +21,14 @@ export const unitsApi = createApi({
                 method: "POST",
                 body: data,
             }),
-            invalidatesTags: ["Units"],
+            invalidatesTags: [{ type: 'Units', id: 'LIST' }],
         }),
         deleteUnit: builder.mutation({
             query: (id) => ({
                 url: `delete?id=${id}`,
                 method: "DELETE",
             }),
-            invalidatesTags: ["Units"],
+            invalidatesTags: [{ type: 'Units', id: 'LIST' }],
         }),
     }),
 });

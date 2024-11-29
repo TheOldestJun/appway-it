@@ -7,7 +7,13 @@ export const productsApi = createApi({
     endpoints: (builder) => ({
         getAllProducts: builder.query({
             query: () => "get-all",
-            providesTags: ["Products"],
+            providesTags: (result) =>
+                result
+                    ? [
+                    ...result.map(({ id }) => ({ type: 'Products', id })),
+                    { type: 'Products', id: 'LIST' },
+                    ]
+                    : [{ type: 'Products', id: 'LIST' }],
         }),
         createProduct: builder.mutation({
             query: ({ ...data }) => ({
@@ -15,7 +21,7 @@ export const productsApi = createApi({
                 method: "POST",
                 body: data,
             }),
-            invalidatesTags: ["Products"],
+            invalidatesTags: [{ type: 'Products', id: 'LIST' }],
         }),
         editProduct: builder.mutation({
             query: ({ ...data }) => ({
@@ -23,7 +29,7 @@ export const productsApi = createApi({
                 method: "PUT",
                 body: data,
             }),
-            invalidatesTags: ["Products"],
+            invalidatesTags: [{ type: 'Products', id: 'LIST' }],
         }),
     }),
 });

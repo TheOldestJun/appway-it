@@ -7,7 +7,13 @@ export const usersApi = createApi({
     endpoints: (builder) => ({
         getAllUsers: builder.query({
             query: () => "users/getall",
-            providesTags: ['Users'],
+            providesTags: (result) =>
+                result
+                    ? [
+                    ...result.map(({ id }) => ({ type: 'Users', id })),
+                    { type: 'Users', id: 'LIST' },
+                    ]
+                    : [{ type: 'Users', id: 'LIST' }],
         }),
         createUser: builder.mutation({
             query: ({...data}) => ({
@@ -15,7 +21,7 @@ export const usersApi = createApi({
                 method: "POST",
                 body: data,
             }),
-            invalidatesTags: ['Users'],
+            invalidatesTags: [{ type: 'Users', id: 'LIST' }],
         }),
         editUser: builder.mutation({
             query: ({ ...data }) => ({
@@ -23,16 +29,16 @@ export const usersApi = createApi({
                 method: "PUT",
                 body: data,
             }),
-            invalidatesTags: ['Users'],
+            invalidatesTags: [{ type: 'Users', id: 'LIST' }],
         }),
         deleteUser: builder.mutation({
             query: (id) => ({
                 url: `delete?id=${id}`,
                 method: "DELETE",
             }),
-            invalidatesTags: ['Users'],
+            invalidatesTags: [{ type: 'Users', id: 'LIST' }],
         })
-    }),
+    })
 })
 
 export const { useGetAllUsersQuery, useCreateUserMutation, useEditUserMutation, useDeleteUserMutation } = usersApi
