@@ -29,6 +29,9 @@ import { FcApproval, FcCancel } from "react-icons/fc";
 import { AllOrdersSkeleton } from "../skeletons"
 import { ServerError } from "../alerts"
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleCheck, faBan } from "@fortawesome/free-solid-svg-icons";
+
 
 
 
@@ -75,8 +78,9 @@ export default function AllApplications() {
                                 <PopoverTrigger asChild>
                                     <Button
                                         variant="ghost"
-                                        disabled={order.closedDate !== null}>
-                                        <FcApproval />
+                                        disabled={order.closedDate !== null}
+                                        className="text-green-600">
+                                        <FontAwesomeIcon icon={faCircleCheck} />
                                     </Button>
                                 </PopoverTrigger>
                                 <PopoverContent className="w-[120px]">
@@ -90,8 +94,9 @@ export default function AllApplications() {
                                 <PopoverTrigger asChild>
                                     <Button
                                         variant="ghost"
-                                        disabled={order.closedDate === null}>
-                                        <FcCancel />
+                                        disabled={order.closedDate === null}
+                                        className="text-red-600">
+                                        <FontAwesomeIcon icon={faBan} />
                                     </Button>
                                 </PopoverTrigger>
                                 <PopoverContent className="w-[120px]">

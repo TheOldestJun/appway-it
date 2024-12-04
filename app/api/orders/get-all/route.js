@@ -11,7 +11,7 @@ export async function GET(request) {
                 }
             },
             orderBy: {
-                createdDate: "asc"
+                status: "asc"
             },
             select: {
                 id: true,

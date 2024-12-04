@@ -24,13 +24,13 @@ import { iconOrderStatus, getOrderStatus } from "@/lib/functions"
 
 export default function GeneralAppData() {
 
-    const { data, isLoading, isError } = useGetAllOrdersQuery();
+    const { data, isLoading, error } = useGetAllOrdersQuery();
     if (isLoading) return <AllOrdersSkeleton />
-    if (isError) return <ServerError error={isError} />
+    if (error) return <ServerError error={error} />
 
     const mappedData = data.map((order) => {
         return (
-            <TableRow key={order.id} className="hover:bg-gray-100   hover:cursor-pointer">
+            <TableRow key={order.id} className="hover:bg-gray-100  hover:cursor-pointer">
                 <TableCell>{`${order.createdBy.firstName} ${order.createdBy.lastName}`}</TableCell>
                 <TableCell className="font-medium">{order.product.title}</TableCell>
                 <TableCell>{order.description}</TableCell>
