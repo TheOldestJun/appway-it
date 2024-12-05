@@ -7,7 +7,7 @@ export async function GET() {
     try {
         const orders = await prisma.order.findMany({
             where: {
-                AND: [{ status: OrderStatus.APPROVED }, { NOT: { status: OrderStatus.CLOSED } }],
+                OR: [{ status: OrderStatus.APPROVED }, { status: OrderStatus.ORDER_PENDING } ],
             },
             orderBy: {
                 createdDate: "asc"
