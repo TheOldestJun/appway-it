@@ -16,7 +16,7 @@ export async function GET() {
             select: {
                 id: true,
                 status: true,
-                product: {
+                product:{
                     select: {
                         title: true
                     }
@@ -28,6 +28,8 @@ export async function GET() {
                     }
                 },
                 quantityCreated: true,
+                quantityOrdered: true,
+                quantityDelivered: true,
                 createdBy: {
                     select: {
                         firstName: true,
@@ -35,6 +37,28 @@ export async function GET() {
                     }
                 },
                 createdDate: true,
+                closedDate: true,
+                approvedBy: {
+                    select: {
+                        firstName: true,
+                        lastName: true
+                    }
+                },
+                approvedDate: true,
+                orderedBy: {
+                    select: {
+                        firstName: true,
+                        lastName: true
+                    }
+                },
+                orderedDate: true,
+                receivedBy: {
+                    select: {
+                        firstName: true,
+                        lastName: true
+                    }
+                },
+                receivedDate: true,
             }
         });
         return NextResponse.json(orders, { status: 200 });

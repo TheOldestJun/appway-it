@@ -18,9 +18,15 @@ import {
     TooltipTrigger,
 } from "@/components/ui/tooltip"
 
+import {
+    HoverCard,
+    HoverCardContent,
+    HoverCardTrigger,
+} from "@/components/ui/hover-card"
+
 
 import { useGetAllOrdersQuery } from "@/store/services/orders"
-import { iconOrderStatus, getOrderStatus } from "@/lib/functions"
+import { iconOrderStatus, getOrderStatus, formatDate } from "@/lib/functions"
 
 export default function GeneralAppData() {
 
@@ -30,25 +36,51 @@ export default function GeneralAppData() {
 
     const mappedData = data.map((order) => {
         return (
-            <TableRow key={order.id} className="hover:bg-gray-100  hover:cursor-pointer">
-                <TableCell>{`${order.createdBy.firstName} ${order.createdBy.lastName}`}</TableCell>
-                <TableCell className="font-medium">{order.product.title}</TableCell>
-                <TableCell>{order.description}</TableCell>
-                <TableCell className="text-right">{order.unit.title}</TableCell>
-                <TableCell className="text-right">{order.quantityCreated}</TableCell>
-                <TableCell className="flex float-end">
-                    <TooltipProvider>
-                        <Tooltip>
-                            <TooltipTrigger asChild>
-                                {iconOrderStatus(order.status)}
-                            </TooltipTrigger>
-                            <TooltipContent>
-                                {getOrderStatus(order.status)}
-                            </TooltipContent>
-                        </Tooltip>
-                    </TooltipProvider>
-                </TableCell>
-            </TableRow>
+            <HoverCard key={order.id}>
+                <HoverCardTrigger asChild>
+                    <TableRow className="hover:bg-gray-100  hover:cursor-pointer">
+                        <TableCell>{`${order.createdBy.firstName} ${order.createdBy.lastName}`}</TableCell>
+                        <TableCell className="font-medium">{order.product.title}</TableCell>
+                        <TableCell>{order.description}</TableCell>
+                        <TableCell className="text-right">{order.unit.title}</TableCell>
+                        <TableCell className="text-right">{order.quantityCreated}</TableCell>
+                        <TableCell className="flex float-end">
+                            <TooltipProvider>
+                                <Tooltip>
+                                    <TooltipTrigger asChild>
+                                        {iconOrderStatus(order.status)}
+                                    </TooltipTrigger>
+                                    <TooltipContent>
+                                        {getOrderStatus(order.status)}
+                                    </TooltipContent>
+                                </Tooltip>
+                            </TooltipProvider>
+                        </TableCell>
+                    </TableRow>
+                </HoverCardTrigger>
+                <HoverCardContent className="w-[500px]">
+                    <p className="text-sm text-slate-900 text-center">Детальна інформація</p>
+                    <hr />
+                    <p className="text-sm text-slate-500">Дата заявки: {formatDate(order.createdDate)}</p>
+                    {order.approvedDate &&
+                        <p className="text-sm text-slate-500">
+                            Погоджено: {`${order.approvedBy.firstName} ${order.approvedBy.lastName}`} {formatDate(order.approvedDate)}
+                        </p>}
+                    {order.orderedDate &&
+                        <p className="text-sm text-slate-500">
+                            Замовлено: {`${order.quantityOrdered} ${order.unit.title}. ${order.orderedBy.firstName} ${order.orderedBy.lastName}`} {formatDate(order.orderedDate)}
+                        </p>}
+                    {order.receivedDate &&
+                        <p className="text-sm text-slate-500">
+                            Прийнято на склад: {`${order.quantityDelivered} ${order.unit.title}. ${order.receivedBy.firstName} ${order.receivedBy.lastName}`} {formatDate(order.receivedDate)}
+                        </p>}
+                    {order.closedDate &&
+                        <p className="text-sm text-slate-500">
+                            Закрито: {formatDate(order.closedDate)}
+                        </p>}
+                </HoverCardContent>
+            </HoverCard>
+
         )
     })
 
