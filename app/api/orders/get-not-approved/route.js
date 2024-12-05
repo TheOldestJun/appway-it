@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 import { OrderStatus } from "@prisma/client";
 import { productsApi } from "@/store/services/products";
 
-export async function GET(request) {
+export async function GET() {
     try {
         const orders = await prisma.order.findMany({
             where: {

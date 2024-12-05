@@ -2,20 +2,18 @@ import prisma from "@/prisma";
 import { NextResponse } from "next/server";
 import { OrderStatus } from "@prisma/client";
 
+
 export async function GET() {
     try {
         const orders = await prisma.order.findMany({
             where: {
-                status: {
-                    not: OrderStatus.REJECTED
-                }
+                AND: [{ status: OrderStatus.APPROVED }, { NOT: { status: OrderStatus.CLOSED } }],
             },
             orderBy: {
-                status: "asc"
+                createdDate: "asc"
             },
             select: {
                 id: true,
-                status: true,
                 product: {
                     select: {
                         title: true
@@ -35,6 +33,7 @@ export async function GET() {
                     }
                 },
                 createdDate: true,
+                status: true
             }
         });
         return NextResponse.json(orders, { status: 200 });

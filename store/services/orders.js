@@ -91,6 +91,16 @@ export const ordersApi = createApi({
             }),
             invalidatesTags: [{ type: 'Orders', id: 'LIST' }],
         }),
+        getNotOrdered: builder.query({
+            query: () => "get-not-ordered",
+            providesTags: (result) =>
+                result
+                    ? [
+                    ...result.map(({ id }) => ({ type: 'Orders', id })),
+                    { type: 'Orders', id: 'LIST' },
+                    ]
+                    : [{ type: 'Orders', id: 'LIST' }],
+        }),
     }),
 });
 
@@ -104,4 +114,5 @@ export const {
     useSetApprovedMutation,
     useGetRejectedQuery,
     useSetRejectedMutation,
-    useDeleteOrderMutation } = ordersApi;
+    useDeleteOrderMutation,
+    useGetNotOrderedQuery } = ordersApi;

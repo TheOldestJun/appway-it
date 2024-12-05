@@ -1,5 +1,8 @@
 "use client";
 
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { NewApps, AllApps } from "@/components/executors";
+
 import { useSelector } from "react-redux"
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
@@ -13,6 +16,19 @@ export default function Executors() {
         }
     }, [user])
     return (
-        <div>Executors page</div>
+                <>
+            <Tabs defaultValue="newApplications" className="w-full">
+                <TabsList className="w-full">
+                    <TabsTrigger value="newApplications">Нові заявки</TabsTrigger>
+                    <TabsTrigger value="allApplications">Статус виконання заявок</TabsTrigger>
+                </TabsList>
+                <TabsContent value="newApplications">
+                    <div className="my-10 mx-20"><NewApps /></div>
+                </TabsContent>
+                <TabsContent value="allApplications">
+                    <div className="my-10 mx-20"><AllApps /></div>
+                </TabsContent>
+            </Tabs>
+        </>
     )
 }
