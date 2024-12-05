@@ -47,8 +47,6 @@ export default function GeneralAppData() {
                             </TooltipContent>
                         </Tooltip>
                     </TooltipProvider>
-
-
                 </TableCell>
             </TableRow>
         )

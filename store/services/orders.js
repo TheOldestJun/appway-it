@@ -101,6 +101,14 @@ export const ordersApi = createApi({
                     ]
                     : [{ type: 'Orders', id: 'LIST' }],
         }),
+        setOrdered: builder.mutation({
+            query: ({ orderId, quantity, executorId }) => ({
+                url: "set-ordered",
+                method: "PUT",
+                body: { orderId, quantity, executorId },
+            }),
+            invalidatesTags: [{ type: 'Orders', id: 'LIST' }],
+        }),
     }),
 });
 
@@ -115,4 +123,5 @@ export const {
     useGetRejectedQuery,
     useSetRejectedMutation,
     useDeleteOrderMutation,
-    useGetNotOrderedQuery } = ordersApi;
+    useGetNotOrderedQuery,
+    useSetOrderedMutation } = ordersApi;
