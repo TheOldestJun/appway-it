@@ -49,7 +49,7 @@ export default function Rejected() {
                 <TableCell className="text-right">{order.quantityCreated}</TableCell>
                 <TableCell className="text-right">{formatDate(order.createdDate)}</TableCell>
                 <TableCell className="text-right">{formatDate(order.rejectedDate)}</TableCell>
-                <TableCell className="text-right">{order.rejectedReason}</TableCell>
+                <TableCell className="">{order.rejectedReason}</TableCell>
                 <TableCell className="text-right">
                     <Popover>
                         <PopoverTrigger asChild>
@@ -79,7 +79,7 @@ export default function Rejected() {
                     <TableHead className="text-right">Кількість</TableHead>
                     <TableHead className="text-right">Дата створення</TableHead>
                     <TableHead className="text-right">Дата відхилення</TableHead>
-                    <TableHead className="text-right">Причина</TableHead>
+                    <TableHead className="text-center">Причина</TableHead>
                     <TableHead className="text-right">Видалити</TableHead>
                 </TableRow>
             </TableHeader>

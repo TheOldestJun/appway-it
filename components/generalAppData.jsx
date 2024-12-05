@@ -44,7 +44,7 @@ export default function GeneralAppData() {
                         <TableCell>{order.description}</TableCell>
                         <TableCell className="text-right">{order.unit.title}</TableCell>
                         <TableCell className="text-right">{order.quantityCreated}</TableCell>
-                        <TableCell className="flex float-end">
+                        <TableCell className="text-right">
                             <TooltipProvider>
                                 <Tooltip>
                                     <TooltipTrigger asChild>
@@ -94,7 +94,7 @@ export default function GeneralAppData() {
                     <TableHead>Примітки</TableHead>
                     <TableHead className="text-right">Од. вим.</TableHead>
                     <TableHead className="text-right">Кількість</TableHead>
-                    <TableHead className="text-right">Стан</TableHead>
+                    <TableHead className="text-right">Статус</TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>

@@ -6,8 +6,31 @@ export async function GET() {
     try {
         const orders = await prisma.order.findMany({
             where: {
-                status:  OrderStatus.ORDERED
-            }
+                OR: [{ status: OrderStatus.ORDERED }, { status: OrderStatus.ORDER_PENDING }]
+            },
+            select: {
+                id: true,
+                product: {
+                    select: {
+                        title: true
+                    }
+                },
+                description: true,
+                unit: {
+                    select: {
+                        title: true
+                    }
+                },
+                quantityCreated: true,
+                quantityOrdered: true,
+                createdBy: {
+                    select: {
+                        firstName: true,
+                        lastName: true
+                    }
+                },
+                createdDate: true
+            },
         });
         return NextResponse.json(orders, { status: 200 });
     } catch (error) {

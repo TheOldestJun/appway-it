@@ -82,7 +82,7 @@ export default function NewApps() {
                     {
                         <Popover>
                             <PopoverTrigger asChild>
-                                <Button variant="outline">Замовити</Button>
+                                <Button variant="outline" size="sm">Замовити</Button>
                             </PopoverTrigger>
                             <PopoverContent className="w-[130px]">
                                 <Input
