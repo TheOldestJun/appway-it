@@ -4,6 +4,9 @@ import { useSelector } from "react-redux"
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { PendingApps, AllApps } from "@/components/warehouse";
+
 export default function Warehouse() {
     const router = useRouter()
     const user = useSelector((state) => state.auth.user)
@@ -13,6 +16,17 @@ export default function Warehouse() {
         }
     }, [user])
     return (
-        <div>Warehouse page</div>
+            <Tabs defaultValue="newApplications" className="w-full">
+                <TabsList className="w-full">
+                    <TabsTrigger value="newApplications">Очікується поставка</TabsTrigger>
+                    <TabsTrigger value="allApplications">Статус виконання заявок</TabsTrigger>
+                </TabsList>
+                <TabsContent value="newApplications">
+                    <div className="my-10 mx-20"><PendingApps /></div>
+                </TabsContent>
+                <TabsContent value="allApplications">
+                    <div className="my-10 mx-20"><AllApps /></div>
+                </TabsContent>
+            </Tabs>
     )
 }

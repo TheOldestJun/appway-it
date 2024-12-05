@@ -109,8 +109,26 @@ export const ordersApi = createApi({
             }),
             invalidatesTags: [{ type: 'Orders', id: 'LIST' }],
         }),
-    }),
-});
+        getNotReceived: builder.query({
+            query: () => "get-not-received",
+            providesTags: (result) =>
+                result
+                    ? [
+                    ...result.map(({ id }) => ({ type: 'Orders', id })),
+                    { type: 'Orders', id: 'LIST' },
+                    ]
+                    : [{ type: 'Orders', id: 'LIST' }],
+        }),
+        setReceived: builder.mutation({
+            query: ({orderId, quantity, receiverId}) => ({
+                url: "set-received",
+                method: "PUT",
+                body: {orderId, quantity, receiverId},
+            }),
+            invalidatesTags: [{ type: 'Orders', id: 'LIST' }],
+            })
+        })
+})
 
 export const { 
     useCreateOrderMutation, 
@@ -124,4 +142,6 @@ export const {
     useSetRejectedMutation,
     useDeleteOrderMutation,
     useGetNotOrderedQuery,
-    useSetOrderedMutation } = ordersApi;
+    useSetOrderedMutation,
+    useGetNotReceivedQuery,
+    useSetReceivedMutation } = ordersApi;
