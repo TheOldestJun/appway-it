@@ -27,7 +27,7 @@ export async function POST(request) {
     });
 
     const mailOptions = {
-        from: 's.v.pukha@gmail.com', // Укажите свой email
+        from: 'admin@appway.pp.ua', // Укажите свой email
         to: email,
         subject: 'Запит на скидання паролю',
         text: `Вітаємо, ${user.firstName}!\nДля скидання паролю, будь ласка, перейдіть за посиланням: ${resetLink}`,
