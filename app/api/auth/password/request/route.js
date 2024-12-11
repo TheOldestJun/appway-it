@@ -14,7 +14,7 @@ export async function POST(request) {
 
     // Создайте JWT токен для ссылки на сброс пароля
     const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-    const resetLink = `${process.env.NEXT_PUBLIC_BASE_URL}/reset-password?token=${token}`;
+    const resetLink = `${process.env.VERCEL_URL}/reset-password?token=${token}`;
 
     // Настройка Nodemailer с Mailjet
     const transporter = nodemailer.createTransport({
