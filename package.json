@@ -3,6 +3,7 @@
   "version": "0.9.1beta",
   "private": true,
   "scripts": {
+    "postinstall": "prisma generate",
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
