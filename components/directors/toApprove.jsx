@@ -41,7 +41,10 @@ export default function ToApprove() {
                 id,
                 approverId: user.id
             })
-            if (payload) toast.success("Заявку успішно схвалено")
+            if (payload) {
+                toast.success("Заявку успішно схвалено")
+                setReason('')
+            }
         } catch (error) {
             toast.error(error);
         }

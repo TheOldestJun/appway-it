@@ -26,7 +26,7 @@ import { formatDate } from "@/lib/functions"
 
 export default function Rejected() {
     const user = useSelector((state) => state.auth.user);
-    const { data, isLoading, error } = useGetRejectedQuery(user.id)
+    const { data, isLoading, error } = useGetRejectedQuery(user?.id)
     const [deleteOrder] = useDeleteOrderMutation()
     if (isLoading) return <AllOrdersSkeleton />
     if (error) return <ServerError error={error} />

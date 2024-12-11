@@ -56,7 +56,7 @@ model Order {
   unitId            String
   quantityCreated   Float
   quantityOrdered   Float?
-  quantityDelivered Float?
+  quantityReceived Float?
   // applicants data
   createdBy         User     @relation(name: "createdBy", fields: [creatorId], references: [id])
   creatorId         String

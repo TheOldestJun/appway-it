@@ -29,7 +29,7 @@ export async function GET(request) {
                 },
                 quantityCreated: true,
                 quantityOrdered: true,
-                quantityDelivered: true,
+                quantityReceived: true,
                 createdBy: {
                     select: {
                         firstName: true,

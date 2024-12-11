@@ -72,7 +72,7 @@ export default function GeneralAppData() {
                         </p>}
                     {order.receivedDate &&
                         <p className="text-sm text-slate-500">
-                            Прийнято на склад: {`${order.quantityDelivered} ${order.unit.title}. ${order.receivedBy.firstName} ${order.receivedBy.lastName}`} {formatDate(order.receivedDate)}
+                            Прийнято на склад: {`${order.quantityReceived} ${order.unit.title}. ${order.receivedBy.firstName} ${order.receivedBy.lastName}`} {formatDate(order.receivedDate)}
                         </p>}
                     {order.closedDate &&
                         <p className="text-sm text-slate-500">

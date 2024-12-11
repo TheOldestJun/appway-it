@@ -78,6 +78,7 @@ export default function NewApps() {
                 <TableCell>{order.description}</TableCell>
                 <TableCell className="text-right">{order.unit.title}</TableCell>
                 <TableCell className="text-right">{order.quantityCreated}</TableCell>
+                <TableCell className="text-right">{order.quantityOrdered}</TableCell>
                 <TableCell className="text-right">
                     {
                         <Popover>
@@ -119,6 +120,7 @@ export default function NewApps() {
                     <TableHead>Примітки</TableHead>
                     <TableHead className="text-right">Од. вим.</TableHead>
                     <TableHead className="text-right">Заявлено</TableHead>
+                    <TableHead className="text-right">Замовлено</TableHead>
                     <TableHead className="text-right">Замовити</TableHead>
                 </TableRow>
             </TableHeader>

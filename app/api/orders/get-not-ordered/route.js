@@ -26,6 +26,7 @@ export async function GET() {
                     }
                 },
                 quantityCreated: true,
+                quantityOrdered: true,
                 createdBy: {
                     select: {
                         firstName: true,
