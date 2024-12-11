@@ -17,6 +17,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"
 import { Button } from "../ui/button"
 import { Input } from "../ui/input"
 import { useState } from "react"
+import toast from "react-hot-toast"
 
 export default function PendingApps() {
     const user = useSelector((state) => state.auth.user)
@@ -28,7 +29,19 @@ export default function PendingApps() {
     if (error) return <ServerError error={error} />
 
     const handleReceive = async (id) => {
-        alert(id)
+        try {
+            const payload = await setReceived({
+                orderId: id,
+                receiverId: user.id,
+                quantity
+            })
+            if (payload) {
+                toast.success("ТМЦ отримано")
+                setQuantity(0)
+            }
+        } catch (error) {
+            toast.error(error);
+        }
     }
 
     const mappedData = data?.map((order) => {
@@ -40,7 +53,7 @@ export default function PendingApps() {
                 <TableCell className="text-right">{order.description}</TableCell>
                 <TableCell className="text-right">{order.unit.title}</TableCell>
                 <TableCell className="text-right">{order.quantityOrdered}</TableCell>
-                {/* <TableCell className="text-right">{order.quantityCreated - order.quantityOrdered}</TableCell> */}
+                <TableCell className="text-right">{order.quantityReceived}</TableCell>
                 <TableCell className="text-right">
                     <Popover>
                         <PopoverTrigger asChild>
@@ -78,7 +91,7 @@ export default function PendingApps() {
                     <TableHead>Примітки</TableHead>
                     <TableHead className="text-right">Од. вим.</TableHead>
                     <TableHead className="text-right">Замовлено</TableHead>
-                    {/* <TableHead className="text-right">Залишок</TableHead> */}
+                    <TableHead className="text-right">Отримано</TableHead>
                     <TableHead className="text-right">Отримати</TableHead>
                 </TableRow>
             </TableHeader>

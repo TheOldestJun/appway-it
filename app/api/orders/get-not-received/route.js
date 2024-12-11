@@ -6,7 +6,7 @@ export async function GET() {
     try {
         const orders = await prisma.order.findMany({
             where: {
-                OR: [{ status: OrderStatus.ORDERED }, { status: OrderStatus.ORDER_PENDING }]
+                OR: [{ status: OrderStatus.ORDERED }, { status: OrderStatus.ORDER_PENDING }, { status: OrderStatus.RECEIVE_PENDING }]
             },
             select: {
                 id: true,
@@ -23,6 +23,7 @@ export async function GET() {
                 },
                 quantityCreated: true,
                 quantityOrdered: true,
+                quantityReceived: true,
                 createdBy: {
                     select: {
                         firstName: true,

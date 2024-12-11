@@ -37,27 +37,39 @@ export default function GeneralAppData() {
     const mappedData = data.map((order) => {
         return (
             <HoverCard key={order.id}>
-                <HoverCardTrigger asChild>
-                    <TableRow className="hover:bg-gray-100  hover:cursor-pointer">
-                        <TableCell>{`${order.createdBy.firstName} ${order.createdBy.lastName}`}</TableCell>
-                        <TableCell className="font-medium">{order.product.title}</TableCell>
-                        <TableCell>{order.description}</TableCell>
-                        <TableCell className="text-right">{order.unit.title}</TableCell>
-                        <TableCell className="text-right">{order.quantityCreated}</TableCell>
-                        <TableCell className="text-right">
-                            <TooltipProvider>
-                                <Tooltip>
-                                    <TooltipTrigger asChild>
-                                        {iconOrderStatus(order.status)}
-                                    </TooltipTrigger>
-                                    <TooltipContent>
-                                        {getOrderStatus(order.status)}
-                                    </TooltipContent>
-                                </Tooltip>
-                            </TooltipProvider>
-                        </TableCell>
-                    </TableRow>
-                </HoverCardTrigger>
+
+                <TableRow className="hover:bg-gray-100  hover:cursor-pointer">
+                    <TableCell>{`${order.createdBy.firstName} ${order.createdBy.lastName}`}</TableCell>
+                    <HoverCardTrigger asChild>
+                        <TableCell TableCell className="font-medium">{order.product.title}</TableCell>
+                    </HoverCardTrigger>
+                    <TableCell>{order.description}</TableCell>
+                    <TableCell className="text-right">{order.unit.title}</TableCell>
+                    <TableCell className="text-right">
+                        <TooltipProvider>
+                            <Tooltip>
+                                <TooltipTrigger>
+                                    {`${order.quantityCreated} / ${order.quantityOrdered == null ? 0 : order.quantityOrdered} / ${order.quantityReceived == null ? 0 : order.quantityReceived}`}
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                    {`Заявлено / Замовлено / Отримано`}
+                                </TooltipContent>
+                            </Tooltip>
+                        </TooltipProvider>
+                    </TableCell>
+                    <TableCell className="text-right">
+                        <TooltipProvider>
+                            <Tooltip>
+                                <TooltipTrigger asChild>
+                                    {iconOrderStatus(order.status)}
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                    {getOrderStatus(order.status)}
+                                </TooltipContent>
+                            </Tooltip>
+                        </TooltipProvider>
+                    </TableCell>
+                </TableRow>
                 <HoverCardContent className="w-[500px]">
                     <p className="text-sm text-slate-900 text-center">Детальна інформація</p>
                     <hr />
