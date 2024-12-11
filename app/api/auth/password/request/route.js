@@ -14,8 +14,8 @@ export async function POST(request) {
 
     // Создайте JWT токен для ссылки на сброс пароля
     const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-    const resetLink = `${process.env.VERCEL_URL}/reset-password?token=${token}`;
-
+    const resetLink = `https://${process.env.VERCEL_URL}/reset-password?token=${token}`;
+    console.log(resetLink);
     // Настройка Nodemailer с Mailjet
     const transporter = nodemailer.createTransport({
         host: "in-v3.mailjet.com",
@@ -32,9 +32,10 @@ export async function POST(request) {
         subject: 'Запит на скидання паролю',
         text: `Вітаємо, ${user.firstName}!\nДля скидання паролю, будь ласка, перейдіть за посиланням: ${resetLink}`,
     };
-
+    console.log(mailOptions);
     try {
-        await transporter.sendMail(mailOptions);
+        const result = await transporter.sendMail(mailOptions);
+        console.log(result);
         return NextResponse.json({ message: 'Лист надіслано' }, { status: 200 });
     } catch (error) {
         console.error(error);
