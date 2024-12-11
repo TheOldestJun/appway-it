@@ -58,7 +58,10 @@ export default function ToApprove() {
                 rejectedReason: reason
             }).unwrap()
             console.log(payload);
-            if (payload) toast.success("Заявку успішно відхилено")
+            if (payload) {
+                toast.success("Заявку успішно відхилено")
+                setReason('')
+            }
         } catch (error) {
             toast.error(error);
         }

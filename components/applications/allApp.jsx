@@ -1,7 +1,7 @@
 import { useGetAllOrdersByUserIdQuery, useSetDeletedMutation, useSetClosedMutation } from "@/store/services/orders"
 import { useSelector } from "react-redux"
 
-import { getOrderStatus, formatDate } from "@/lib/functions"
+import { getOrderStatus, formatDate, getTableRowColor } from "@/lib/functions"
 
 import {
     Table,
@@ -25,7 +25,6 @@ import {
 } from "@/components/ui/popover"
 
 import toast from "react-hot-toast"
-import { FcApproval, FcCancel } from "react-icons/fc";
 import { AllOrdersSkeleton } from "../skeletons"
 import { ServerError } from "../alerts"
 
@@ -65,48 +64,49 @@ export default function AllApplications() {
     const mappedData = orders?.map((order, index) => {
         return (
             <HoverCard key={order.id}>
-                <HoverCardTrigger asChild>
-                    <TableRow className="hover:bg-gray-100 hover:cursor-pointer">
-                        <TableCell>{index + 1}</TableCell>
+
+                <TableRow className={`hover:bg-gray-100 hover:cursor-pointer ${getTableRowColor(order.status)} `}>
+                    <TableCell>{index + 1}</TableCell>
+                    <HoverCardTrigger asChild>
                         <TableCell>{order.product.title}</TableCell>
-                        <TableCell>{order.description}</TableCell>
-                        <TableCell className="text-right">{order.unit.title}</TableCell>
-                        <TableCell className="text-right">{order.quantityCreated}</TableCell>
-                        <TableCell className="text-right">{getOrderStatus(order.status)}</TableCell>
-                        <TableCell className="text-right">
-                            <Popover>
-                                <PopoverTrigger asChild>
-                                    <Button
-                                        variant="ghost"
-                                        disabled={order.closedDate !== null}
-                                        className="text-green-600">
-                                        <FontAwesomeIcon icon={faCircleCheck} />
-                                    </Button>
-                                </PopoverTrigger>
-                                <PopoverContent className="w-[120px]">
-                                    <p className="text-sm">Ви впевнені?</p>
-                                    <Button variant="destructive" className="mt-2 w-full" onClick={() => { handleClose(order.id) }}>Так</Button>
-                                </PopoverContent>
-                            </Popover>
-                        </TableCell>
-                        <TableCell className="text-right">
-                            <Popover>
-                                <PopoverTrigger asChild>
-                                    <Button
-                                        variant="ghost"
-                                        disabled={order.closedDate === null}
-                                        className="text-red-600">
-                                        <FontAwesomeIcon icon={faBan} />
-                                    </Button>
-                                </PopoverTrigger>
-                                <PopoverContent className="w-[120px]">
-                                    <p className="text-sm">Ви впевнені?</p>
-                                    <Button variant="destructive" className="mt-2 w-full" onClick={() => { handleDelete(order.id) }}>Так</Button>
-                                </PopoverContent>
-                            </Popover>
-                        </TableCell>
-                    </TableRow>
-                </HoverCardTrigger>
+                    </HoverCardTrigger>
+                    <TableCell>{order.description}</TableCell>
+                    <TableCell className="text-right">{order.unit.title}</TableCell>
+                    <TableCell className="text-right">{order.quantityCreated}</TableCell>
+                    <TableCell className="text-right">{getOrderStatus(order.status)}</TableCell>
+                    <TableCell className="text-right">
+                        <Popover>
+                            <PopoverTrigger asChild>
+                                <Button
+                                    variant="ghost"
+                                    disabled={order.closedDate !== null}
+                                    className="text-green-600">
+                                    <FontAwesomeIcon icon={faCircleCheck} />
+                                </Button>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-[120px]">
+                                <p className="text-sm">Ви впевнені?</p>
+                                <Button variant="destructive" className="mt-2 w-full" onClick={() => { handleClose(order.id) }}>Так</Button>
+                            </PopoverContent>
+                        </Popover>
+                    </TableCell>
+                    <TableCell className="text-right">
+                        <Popover>
+                            <PopoverTrigger asChild>
+                                <Button
+                                    variant="ghost"
+                                    disabled={order.closedDate === null}
+                                    className="text-red-600">
+                                    <FontAwesomeIcon icon={faBan} />
+                                </Button>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-[120px]">
+                                <p className="text-sm">Ви впевнені?</p>
+                                <Button variant="destructive" className="mt-2 w-full" onClick={() => { handleDelete(order.id) }}>Так</Button>
+                            </PopoverContent>
+                        </Popover>
+                    </TableCell>
+                </TableRow>
                 <HoverCardContent className="w-[500px]">
                     <p className="text-sm text-slate-900 text-center">Детальна інформація</p>
                     <hr />
