@@ -4,6 +4,7 @@ import Providers from './providers';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { Toaster } from 'react-hot-toast';
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -38,6 +39,7 @@ export default function RootLayout({ children }) {
             <Footer />
             <Toaster />
           </div>
+          <SpeedInsights />
         </Providers>
       </body>
     </html>
