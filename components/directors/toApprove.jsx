@@ -23,7 +23,7 @@ import toast from "react-hot-toast"
 import { FcApproval, FcCancel } from "react-icons/fc";
 import { AllOrdersSkeleton } from "../skeletons"
 import { ServerError } from "../alerts"
-import { getOrderStatus, formatDate } from "@/lib/functions"
+import { formatDate } from "@/lib/functions"
 
 export default function ToApprove() {
     const user = useSelector((state) => state.auth.user);

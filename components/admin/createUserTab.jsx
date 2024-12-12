@@ -13,8 +13,6 @@ import {
 import { useCreateUserMutation } from "@/store/services/users";
 
 
-//import { useGetRolesQuery } from "@/store/services/roles"
-
 
 export default function CreateUserTab({ roles }) {
     const [email, setEmail] = useState('')

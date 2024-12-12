@@ -2,7 +2,6 @@ import { Label } from "../ui/label"
 import { Input } from "../ui/input"
 import { Button } from "../ui/button"
 import { Separator } from "../ui/separator"
-import toast from 'react-hot-toast';
 
 import NewAppTable from "./newAppTable"
 import Units from "./units"
