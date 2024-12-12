@@ -20,10 +20,11 @@ import {
 import { Input } from "../ui/input"
 
 import toast from "react-hot-toast"
-import { FcApproval, FcCancel } from "react-icons/fc";
 import { AllOrdersSkeleton } from "../skeletons"
 import { ServerError } from "../alerts"
 import { formatDate } from "@/lib/functions"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faThumbsUp, faThumbsDown } from "@fortawesome/free-solid-svg-icons";
 
 export default function ToApprove() {
     const user = useSelector((state) => state.auth.user);
@@ -75,11 +76,11 @@ export default function ToApprove() {
                 <TableCell>{order.description}</TableCell>
                 <TableCell className="text-right">{order.unit.title}</TableCell>
                 <TableCell className="text-right">{order.quantityCreated}</TableCell>
-                <TableCell className="text-right"><Button variant="ghost" onClick={() => { handleApprove(order.id) }}><FcApproval /></Button></TableCell>
+                <TableCell className="text-right"><Button variant="ghost" onClick={() => { handleApprove(order.id) }}><FontAwesomeIcon icon={faThumbsUp} className="text-green-600" /></Button></TableCell>
                 <TableCell className="text-right">
                     <Popover>
                         <PopoverTrigger asChild>
-                            <Button variant="ghost" onClick={() => { }}><FcCancel /></Button>
+                            <Button variant="ghost" onClick={() => { }}><FontAwesomeIcon icon={faThumbsDown} className="text-red-600" /></Button>
                         </PopoverTrigger>
                         <PopoverContent className="w-[300px]">
                             <p className="text-sm">Вкажіть причину</p>

@@ -18,7 +18,8 @@ import {
 } from "@/components/ui/popover"
 
 import toast from "react-hot-toast"
-import { FcCancel } from "react-icons/fc";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { AllOrdersSkeleton } from "../skeletons"
 import { ServerError } from "../alerts"
 
@@ -55,7 +56,7 @@ export default function Rejected() {
                         <PopoverTrigger asChild>
                             <Button
                                 variant="ghost">
-                                <FcCancel />
+                                <FontAwesomeIcon icon={faCircleXmark} className="text-red-600" />
                             </Button>
                         </PopoverTrigger>
                         <PopoverContent className="w-[180px]">
