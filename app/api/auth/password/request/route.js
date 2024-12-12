@@ -1,4 +1,4 @@
-import nodemailer from 'nodemailer';
+
 import jwt from 'jsonwebtoken';
 import { NextResponse } from 'next/server';
 import prisma from '@/prisma';
