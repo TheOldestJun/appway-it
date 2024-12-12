@@ -1,3 +1,3 @@
-import ServerError from "./serverError";
+import ServerError from './serverError';
 
 export { ServerError };

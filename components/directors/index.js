@@ -1,4 +1,4 @@
-import AppStatus from "./appStatus";
-import ToApprove from "./toApprove";
+import AppStatus from './appStatus';
+import ToApprove from './toApprove';
 
-export { AppStatus, ToApprove }
+export { AppStatus, ToApprove };

@@ -1,7 +1,9 @@
-import ClientPage from "./clientPage";
+import ClientPage from './clientPage';
 
 export default function Home() {
   return (
-    <><ClientPage key="client-page"/></>
-  )
+    <>
+      <ClientPage key="client-page" />
+    </>
+  );
 }
