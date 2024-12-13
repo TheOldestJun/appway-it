@@ -58,7 +58,7 @@ export default function PendingApps() {
           {order.createdBy.firstName} {order.createdBy.lastName}
         </TableCell>
         <TableCell className="">{order.product.title}</TableCell>
-        <TableCell className="text-right">{order.description}</TableCell>
+        <TableCell className="text-left">{order.description}</TableCell>
         <TableCell className="text-right">{order.unit.title}</TableCell>
         <TableCell className="text-right">{order.quantityOrdered}</TableCell>
         <TableCell className="text-right">{order.quantityReceived}</TableCell>

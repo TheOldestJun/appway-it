@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { PendingApps, AllApps } from '@/components/warehouse';
+import { PendingApps, AllApps, NewApps } from '@/components/warehouse';
 
 export default function Warehouse() {
   const router = useRouter();
@@ -18,12 +18,18 @@ export default function Warehouse() {
   return (
     <Tabs defaultValue="newApplications" className="w-full">
       <TabsList className="w-full">
-        <TabsTrigger value="newApplications">Очікується поставка</TabsTrigger>
+        <TabsTrigger value="newApplications">Нові заявки</TabsTrigger>
+        <TabsTrigger value="pendingApplications">Очікується поставка</TabsTrigger>
         <TabsTrigger value="allApplications">
           Статус виконання заявок
         </TabsTrigger>
       </TabsList>
       <TabsContent value="newApplications">
+        <div className="mx-20 my-10">
+          <NewApps />
+        </div>
+      </TabsContent>
+      <TabsContent value="pendingApplications">
         <div className="mx-20 my-10">
           <PendingApps />
         </div>
