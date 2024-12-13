@@ -17,7 +17,7 @@ export async function POST(req) {
   const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
     expiresIn: '1h',
   });
-  const resetLink = `https://${process.env.VERCEL_URL}/reset-password?token=${token}`;
+  const resetLink = `${process.env.HOMEPAGE_URL}/reset-password?token=${token}`;
 
   const mailjet = Mailjet.apiConnect(
     process.env.MAILJET_API_KEY,
