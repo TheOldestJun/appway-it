@@ -127,6 +127,14 @@ export const ordersApi = createApi({
       }),
       invalidatesTags: [{ type: 'Orders', id: 'LIST' }],
     }),
+    setInStock: builder.mutation({
+      query: ({ orderId, quantity, receiverId }) => ({
+        url: 'set-in-stock',
+        method: 'PUT',
+        body: { orderId, quantity,receiverId },
+      }),
+      invalidatesTags: [{ type: 'Orders', id: 'LIST' }],
+    })
   }),
 });
 
@@ -145,4 +153,5 @@ export const {
   useSetOrderedMutation,
   useGetNotReceivedQuery,
   useSetReceivedMutation,
+  useSetInStockMutation,
 } = ordersApi;

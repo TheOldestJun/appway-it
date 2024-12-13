@@ -73,6 +73,7 @@ export default function PendingApps() {
               <Input
                 placeholder="Кількість"
                 type="number"
+                max={order.quantityOrdered}
                 value={quantity}
                 onChange={e => setQuantity(e.target.value)}
               />

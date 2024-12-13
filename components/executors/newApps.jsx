@@ -96,6 +96,7 @@ export default function NewApps() {
                 <Input
                   placeholder="Кількість"
                   type="number"
+                  max={order.quantityCreated}
                   value={quantity}
                   onChange={e => setQuantity(e.target.value)}
                 />

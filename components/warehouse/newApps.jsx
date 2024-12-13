@@ -20,24 +20,39 @@ import toast from 'react-hot-toast';
 import {
     useGetNotOrderedQuery,
     useSetReceivedMutation,
+    useSetInStockMutation
 } from '@/store/services/orders';
 
 import { AllOrdersSkeleton } from '../skeletons';
 import { ServerError } from '../alerts';
 import { formatDate } from '@/lib/functions';
-import { AlignRight } from 'lucide-react';
+import { useSelector } from 'react-redux';
 
 
 export default function NewApps() {
+    const user = useSelector(state => state.auth.user);
     const [quantity, setQuantity] = useState(0);
     const { data, isLoading, isError } = useGetNotOrderedQuery();
     const [setReceived] = useSetReceivedMutation();
+    const [setInStock] = useSetInStockMutation();
 
     if (isLoading) return <AllOrdersSkeleton />;
     if (isError) return <ServerError error={isError} />;
 
     const handleInStock = async (id) => {
-        alert("Замовлення відправлено");
+        try {
+            const payload = await setInStock({
+                orderId: id,
+                receiverId: user.id,
+                quantity,
+            });
+            if (payload) {
+                toast.success('Заявку оновлено');
+                setQuantity(0);
+            }
+        } catch (error) {
+            toast.error(error);
+        }
     }
 
     const mappedData = data?.map(order => {
@@ -64,6 +79,7 @@ export default function NewApps() {
                                 <Input
                                     placeholder="Кількість"
                                     type="number"
+                                    max={order.quantityCreated}
                                     value={quantity}
                                     onChange={e => setQuantity(e.target.value)}
                                 />
