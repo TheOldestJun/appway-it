@@ -1,5 +1,5 @@
-import ClientAdmin from './clientPage';
 import prisma from '@/prisma';
+import ClientAdmin from './clientPage';
 
 const getRoles = async () => {
   const roles = await prisma.role.findMany();

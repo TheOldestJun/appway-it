@@ -1,10 +1,12 @@
 import localFont from 'next/font/local';
-import './globals.css';
-import Providers from './providers';
-import Header from '@/components/layout/Header';
-import Footer from '@/components/layout/Footer';
 import { Toaster } from 'react-hot-toast';
+
+import Footer from '@/components/layout/Footer';
+import Header from '@/components/layout/Header';
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import Providers from './providers';
+
+import './globals.css';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',

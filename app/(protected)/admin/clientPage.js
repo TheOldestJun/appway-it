@@ -1,16 +1,15 @@
 'use client';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useSelector } from 'react-redux';
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
   CreateUserTab,
   EditUserTab,
   DeleteUserTab,
   DeleteUnitsTab,
 } from '@/components/admin';
-
-import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export default function ClientAdmin({ roles }) {
   const router = useRouter();

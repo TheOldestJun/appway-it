@@ -1,9 +1,11 @@
-import {
-  useGetRejectedQuery,
-  useDeleteOrderMutation,
-} from '@/store/services/orders';
+import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
 import {
   Table,
   TableBody,
@@ -13,20 +15,16 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { Button } from '../ui/button';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
-
-import toast from 'react-hot-toast';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
-import { AllOrdersSkeleton } from '../skeletons';
-import { ServerError } from '../alerts';
-
 import { formatDate } from '@/lib/functions';
+import {
+  useGetRejectedQuery,
+  useDeleteOrderMutation,
+} from '@/store/services/orders';
+import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { ServerError } from '../alerts';
+import { AllOrdersSkeleton } from '../skeletons';
+import { Button } from '../ui/button';
 
 export default function Rejected() {
   const user = useSelector(state => state.auth.user);

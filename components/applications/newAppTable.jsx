@@ -1,3 +1,6 @@
+import toast from 'react-hot-toast';
+import { useSelector, useDispatch } from 'react-redux';
+
 import {
   Table,
   TableBody,
@@ -7,12 +10,9 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { Button } from '../ui/button';
-import toast from 'react-hot-toast';
-
-import { useSelector, useDispatch } from 'react-redux';
 import { removeOrder, clearOrders } from '@/store/reducers/currentOrderSlice';
 import { useCreateOrderMutation } from '@/store/services/orders';
+import { Button } from '../ui/button';
 
 export default function NewAppTable() {
   const dispatch = useDispatch();

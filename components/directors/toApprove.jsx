@@ -1,11 +1,12 @@
-import {
-  useGetNotApprovedQuery,
-  useSetApprovedMutation,
-  useSetRejectedMutation,
-} from '@/store/services/orders';
-import { useSelector } from 'react-redux';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
+import { useSelector } from 'react-redux';
 
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
 import {
   Table,
   TableBody,
@@ -15,20 +16,18 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { Button } from '../ui/button';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
-import { Input } from '../ui/input';
-
-import toast from 'react-hot-toast';
-import { AllOrdersSkeleton } from '../skeletons';
-import { ServerError } from '../alerts';
 import { formatDate } from '@/lib/functions';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  useGetNotApprovedQuery,
+  useSetApprovedMutation,
+  useSetRejectedMutation,
+} from '@/store/services/orders';
 import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { ServerError } from '../alerts';
+import { AllOrdersSkeleton } from '../skeletons';
+import { Button } from '../ui/button';
+import { Input } from '../ui/input';
 
 export default function ToApprove() {
   const user = useSelector(state => state.auth.user);
@@ -77,7 +76,7 @@ export default function ToApprove() {
       <TableRow
         key={order.id}
         className="hover:cursor-pointer hover:bg-gray-100"
-        onClick={() => {}}
+        onClick={() => { }}
       >
         <TableCell>{formatDate(order.createdDate)}</TableCell>
         <TableCell>{order.product.title}</TableCell>
@@ -97,7 +96,7 @@ export default function ToApprove() {
         <TableCell className="text-right">
           <Popover>
             <PopoverTrigger asChild>
-              <Button variant="ghost" onClick={() => {}}>
+              <Button variant="ghost" onClick={() => { }}>
                 <FontAwesomeIcon icon={faThumbsDown} className="text-red-600" />
               </Button>
             </PopoverTrigger>

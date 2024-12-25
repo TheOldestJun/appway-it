@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import { Input } from '../ui/input';
-import { Button } from '../ui/button';
+
 import {
   Select,
   SelectContent,
@@ -9,8 +8,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-
 import { useCreateUserMutation } from '@/store/services/users';
+import { Button } from '../ui/button';
+import { Input } from '../ui/input';
 
 export default function CreateUserTab({ roles }) {
   const [email, setEmail] = useState('');

@@ -1,22 +1,6 @@
-import {
-  useGetAllOrdersByUserIdQuery,
-  useSetDeletedMutation,
-  useSetClosedMutation,
-} from '@/store/services/orders';
+import toast from 'react-hot-toast';
 import { useSelector } from 'react-redux';
 
-import { getOrderStatus, formatDate, getTableRowColor } from '@/lib/functions';
-
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
-import { Button } from '../ui/button';
 import {
   HoverCard,
   HoverCardContent,
@@ -27,13 +11,26 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-
-import toast from 'react-hot-toast';
-import { AllOrdersSkeleton } from '../skeletons';
-import { ServerError } from '../alerts';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
+import { getOrderStatus, formatDate, getTableRowColor } from '@/lib/functions';
+import {
+  useGetAllOrdersByUserIdQuery,
+  useSetDeletedMutation,
+  useSetClosedMutation,
+} from '@/store/services/orders';
 import { faCircleCheck, faBan } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { ServerError } from '../alerts';
+import { AllOrdersSkeleton } from '../skeletons';
+import { Button } from '../ui/button';
 
 export default function AllApplications() {
   const user = useSelector(state => state.auth.user);

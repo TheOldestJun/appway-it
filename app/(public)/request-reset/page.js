@@ -1,9 +1,10 @@
 'use client';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
 export default function Page() {
   const [email, setEmail] = useState('');

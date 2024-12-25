@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import toast from 'react-hot-toast';
-import { Input } from '../ui/input';
-import { Button } from '../ui/button';
+
 import {
   Select,
   SelectContent,
@@ -9,14 +8,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-
-import { UserSkeleton } from '../skeletons';
-import { ServerError } from '../alerts';
-
 import {
   useGetAllUsersQuery,
   useEditUserMutation,
 } from '@/store/services/users';
+import { ServerError } from '../alerts';
+import { UserSkeleton } from '../skeletons';
+import { Button } from '../ui/button';
+import { Input } from '../ui/input';
 
 export default function EditUserTab({ roles }) {
   const [id, setId] = useState('');

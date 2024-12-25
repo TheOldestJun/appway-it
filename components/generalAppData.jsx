@@ -1,6 +1,10 @@
-import { AllOrdersSkeleton } from './skeletons';
-import { ServerError } from './alerts';
-
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import {
   Table,
   TableBody,
@@ -9,16 +13,10 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-
-import { useGetAllOrdersQuery } from '@/store/services/orders';
 import { mapGeneralData } from '@/lib/functions';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
+import { useGetAllOrdersQuery } from '@/store/services/orders';
+import { ServerError } from './alerts';
+import { AllOrdersSkeleton } from './skeletons';
 
 export default function GeneralAppData() {
   const { data, isLoading, error } = useGetAllOrdersQuery();

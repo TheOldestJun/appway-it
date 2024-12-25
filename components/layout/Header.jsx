@@ -1,9 +1,10 @@
 'use client';
 import Image from 'next/image';
-import { getGreeting } from '@/lib/functions';
-import { Button } from '../ui/button';
 import { useSelector, useDispatch } from 'react-redux';
+
+import { getGreeting } from '@/lib/functions';
 import { logout } from '@/store/reducers/authSlice';
+import { Button } from '../ui/button';
 
 export default function Header() {
   const dispatch = useDispatch();

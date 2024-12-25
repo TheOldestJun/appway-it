@@ -1,12 +1,12 @@
 'use client';
-
-import { Provider } from 'react-redux';
-import { store } from '@/store/store';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { useRouter } from 'next/navigation';
-import { login } from '@/store/reducers/authSlice';
 import jwt from 'jsonwebtoken';
+import { useRouter } from 'next/navigation';
+import { Provider } from 'react-redux';
+import { useDispatch } from 'react-redux';
+
+import { login } from '@/store/reducers/authSlice';
+import { store } from '@/store/store';
 
 const AuthProvider = ({ children }) => {
   const dispatch = useDispatch();

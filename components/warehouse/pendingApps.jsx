@@ -1,7 +1,7 @@
-import {
-  useGetNotReceivedQuery,
-  useSetReceivedMutation,
-} from '@/store/services/orders';
+import { useState } from 'react';
+import toast from 'react-hot-toast';
+import { useSelector } from 'react-redux';
+
 import {
   Table,
   TableBody,
@@ -11,16 +11,16 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-
-import { useSelector } from 'react-redux';
-import { AllOrdersSkeleton } from '../skeletons';
-import { ServerError } from '../alerts';
 import { formatDate } from '@/lib/functions';
-import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
+import {
+  useGetNotReceivedQuery,
+  useSetReceivedMutation,
+} from '@/store/services/orders';
+import { ServerError } from '../alerts';
+import { AllOrdersSkeleton } from '../skeletons';
 import { Button } from '../ui/button';
 import { Input } from '../ui/input';
-import { useState } from 'react';
-import toast from 'react-hot-toast';
+import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover';
 
 export default function PendingApps() {
   const user = useSelector(state => state.auth.user);

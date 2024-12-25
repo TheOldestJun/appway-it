@@ -1,12 +1,12 @@
 'use client';
-
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
 import { useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
-import axios from 'axios';
-import toast from 'react-hot-toast';
 import { Suspense } from 'react';
+import axios from 'axios';
+import { useRouter, useSearchParams } from 'next/navigation';
+import toast from 'react-hot-toast';
+
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
 function ResetPassword() {
   const [password, setPassword] = useState('');

@@ -1,15 +1,14 @@
-import { Label } from '../ui/label';
-import { Input } from '../ui/input';
-import { Button } from '../ui/button';
-import { Separator } from '../ui/separator';
-
-import NewAppTable from './newAppTable';
-import Units from './units';
-import Products from './products';
-
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+
 import { addOrder, clearLine } from '@/store/reducers/currentOrderSlice';
+import NewAppTable from './newAppTable';
+import Products from './products';
+import Units from './units';
+import { Button } from '../ui/button';
+import { Input } from '../ui/input';
+import { Label } from '../ui/label';
+import { Separator } from '../ui/separator';
 
 export default function NewApplication() {
   const dispatch = useDispatch();

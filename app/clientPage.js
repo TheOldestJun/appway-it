@@ -1,16 +1,16 @@
 'use client';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
-import toast from 'react-hot-toast';
-
 import { useState } from 'react';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import { login } from '@/store/reducers/authSlice';
-import { useRouter } from 'next/navigation';
 import jwt from 'jsonwebtoken';
+import { useRouter } from 'next/navigation';
+import toast from 'react-hot-toast';
+import { useDispatch } from 'react-redux';
+
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Separator } from '@/components/ui/separator';
+import { login } from '@/store/reducers/authSlice';
 
 export default function ClientPage() {
   const router = useRouter();

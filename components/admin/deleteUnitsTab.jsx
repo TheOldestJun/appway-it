@@ -1,4 +1,6 @@
-import { Button } from '../ui/button';
+import { useState } from 'react';
+import toast from 'react-hot-toast';
+
 import {
   Select,
   SelectContent,
@@ -6,14 +8,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import toast from 'react-hot-toast';
 import {
   useGetAllUnitsQuery,
   useDeleteUnitMutation,
 } from '@/store/services/units';
 import { ServerError } from '../alerts';
 import { DeleteUnitsSkeleton } from '../skeletons';
-import { useState } from 'react';
+import { Button } from '../ui/button';
 
 export default function DeleteUnitsTab() {
   const [id, setId] = useState('');

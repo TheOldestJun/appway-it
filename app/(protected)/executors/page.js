@@ -1,11 +1,10 @@
 'use client';
-
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { NewApps, AllApps } from '@/components/executors';
-
-import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useSelector } from 'react-redux';
+
+import { NewApps, AllApps } from '@/components/executors';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export default function Executors() {
   const router = useRouter();

@@ -1,8 +1,7 @@
 'use client';
-
-import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useSelector } from 'react-redux';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { PendingApps, AllApps, NewApps } from '@/components/warehouse';

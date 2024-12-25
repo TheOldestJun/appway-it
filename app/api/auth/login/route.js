@@ -1,7 +1,8 @@
-import prisma from '@/prisma';
-import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 import { NextResponse } from 'next/server';
+
+import prisma from '@/prisma';
 
 export async function POST(request) {
   const body = await request.json();

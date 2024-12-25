@@ -1,15 +1,14 @@
 'use client';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useSelector } from 'react-redux';
 
 import {
   AllApplications,
   NewApplication,
   Rejected,
 } from '@/components/applications';
-
-import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export default function Applicants() {
   const router = useRouter();

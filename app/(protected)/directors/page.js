@@ -1,11 +1,10 @@
 'use client';
-
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { AppStatus, ToApprove } from '@/components/directors';
-
-import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useSelector } from 'react-redux';
+
+import { AppStatus, ToApprove } from '@/components/directors';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export default function Directors() {
   const router = useRouter();
